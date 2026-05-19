@@ -1,26 +1,43 @@
-# AGENTS.md
+# Repository Instructions
 
-This repository stores reusable Agent Skills.
+## Purpose
 
-## Repository layout
+Publish reusable Agent Skills. A valid skill is a directory with a `SKILL.md` manifest, concise instructions, and colocated assets.
 
-- `skills/<skill_name>/SKILL.md` — one skill per directory.
-- Optional skill assets (examples/scripts/resources) should stay inside the same `skills/<skill_name>/` directory.
+## Repository Map
 
-## Skill conventions
+- `skills/<skill-name>/SKILL.md` - required manifest and skill instructions.
+- `skills/<skill-name>/reference/` - optional deep docs loaded only when needed.
+- `README.md` - public overview.
+- `.gitignore` - editor, runtime, dependency, log, temp, and build artifacts.
 
-To keep skills compatible with the Agent Skills specification:
+## Default Workflow
 
-1. Use `kebab-case` for `<skill_name>` directory names.
-2. Each skill directory must contain a `SKILL.md` file.
-3. `SKILL.md` should include YAML front matter with at least:
-   - `name`
-   - `description`
-4. Keep instructions actionable, concise, and tool-oriented.
-5. Put skill-specific files next to `SKILL.md` instead of the repository root.
+When adding or changing a skill:
 
-## Adding a new skill
+1. Create or edit `skills/<skill-name>/`; use kebab-case.
+2. Keep the entrypoint in `SKILL.md` with YAML front matter: string `name` and `description`.
+3. Put concise, tool-oriented instructions in `SKILL.md`.
+4. Move narrow or long-form guidance to sibling docs such as `reference/*.md`.
+5. Keep examples, scripts, and resources inside the skill directory.
+6. Verify discovery: `npx skills add "T:\agent-skills" --list`.
 
-1. Create `skills/<skill_name>/`.
-2. Add `skills/<skill_name>/SKILL.md` with metadata and usage instructions.
-3. Add any supporting files inside the same folder.
+## Boundaries
+
+- Do not put skill-specific assets at repo root.
+- Do not add a root manifest unless the installer or project requirements explicitly require one; `vercel-labs/skills` discovers valid `SKILL.md` files directly.
+- Do not commit generated runtime state, dependency folders, logs, temp files, or build output.
+- Preserve skill names unless the user asks to rename them.
+
+## Pointers
+
+- New skill scaffold: `skills/example-skill/SKILL.md`.
+- Instruction-file guidance: `skills/improve-agents-md/`.
+
+## References
+
+- https://agentskills.io/specification
+- https://agentskills.io/skill-creation/best-practices
+- https://agentskills.io/skill-creation/optimizing-descriptions
+- https://agentskills.io/skill-creation/evaluating-skills
+- https://agentskills.io/skill-creation/using-scripts
