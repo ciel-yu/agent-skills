@@ -8,6 +8,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# OpenCode runtime state
+.omo/
+
 # Logs and temp
 *.log
 *.tmp
