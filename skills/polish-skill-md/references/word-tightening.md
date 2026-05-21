@@ -1,6 +1,6 @@
 # Word Tightening
 
-Tactical rules for reducing token count in a `SKILL.md` without changing meaning. Apply during the **revise** phase, after structural fixes (pattern alignment, progressive disclosure) are settled. Never tighten before the structure is correct - you will polish prose that should have been deleted.
+Rules for reducing token count in a `SKILL.md` without changing meaning. Apply during **revise**, after structural fixes (pattern alignment, progressive disclosure) are settled. Never tighten first; you will polish prose that should have been deleted.
 
 ---
 
@@ -8,7 +8,7 @@ Tactical rules for reducing token count in a `SKILL.md` without changing meaning
 
 - **Goal**: reduce tokens; improve scanability, parser clarity, and handoff stability.
 - **Meaning**: preserve intent, imperatives, constraints, and safety wording; add no semantics.
-- **Tokens**: prefer short, common technical terms; use low-token forms when equivalent.
+- **Tokens**: prefer short, common technical terms; use lower-token forms when equivalent.
 - **Filler**: remove hedges, repetition, connective prose, and weak modifiers.
 - **Vocab**: use standard industry terms; avoid rare synonyms.
 - **Structure**: prefer headings, bullets, and code blocks; keep hierarchy grouped.
@@ -18,12 +18,12 @@ Tactical rules for reducing token count in a `SKILL.md` without changing meaning
 
 ## Order of Operations
 
-1. **Structure first.** Convert paragraphs that enumerate to bullet lists. Convert procedural prose to numbered steps. Convert key/value descriptions to tables. Restructuring removes more tokens than wordsmithing ever will.
-2. **Filler pass.** Strip hedges, weak modifiers, connective prose. Do not yet touch terminology.
+1. **Structure first.** Convert enumerative paragraphs to bullets, procedural prose to numbered steps, and key/value prose to tables. Restructuring saves more tokens than wordsmithing.
+2. **Filler pass.** Strip hedges, weak modifiers, and connective prose. Do not touch terminology yet.
 3. **Vocabulary pass.** Replace rare or compound phrases with standard terms.
 4. **Final read.** Confirm every imperative, constraint, and safety clause survived intact.
 
-Run passes in this order. Reordering wastes work - a vocabulary swap inside a paragraph you were about to bulletize is throwaway.
+Run passes in this order. Reordering wastes work: a vocab swap inside prose you later bulletize is throwaway.
 
 ---
 
@@ -34,12 +34,12 @@ Run passes in this order. Reordering wastes work - a vocabulary swap inside a pa
 | Hedges | "perhaps", "might want to", "consider", "it may be useful to" | Delete; convert to imperative if load-bearing. |
 | Weak modifiers | "very", "really", "quite", "fairly", "somewhat", "simply", "just" | Delete. |
 | Connective prose | "It is important to note that", "In order to", "As mentioned above", "Please note" | Delete or replace ("In order to" → "To"). |
-| Throat-clearing | "This section describes…", "The following is a list of…", "Below you will find…" | Delete; the heading already announces it. |
+| Throat-clearing | "This section describes...", "The following is a list of...", "Below you will find..." | Delete; the heading already says it. |
 | Restated rules | Same constraint repeated in two sections | Keep one; delete the other. |
 | Polite framing | "feel free to", "you may want to", "if you'd like" | Delete or convert to imperative. |
-| Meta narration | "We will now…", "Next, we will…", "Let's…" | Delete; the structure carries the flow. |
+| Meta narration | "We will now...", "Next, we will...", "Let's..." | Delete; the structure carries the flow. |
 
-**Soft-gate words are the most dangerous filler in agent-facing files.** "Consider validating" reads as filler to a human but is a real semantic downgrade for an agent: it turns a constraint into a suggestion. Hard-gate constraints (`DO NOT proceed to step N until…`) survive tightening; soft suggestions get deleted in this pass, then the agent silently skips the check. If a hedge is load-bearing, rewrite it as an imperative; if it is not load-bearing, delete the whole sentence.
+**Soft-gate words are the most dangerous filler in agent-facing files.** "Consider validating" looks like harmless prose, but it weakens a constraint into a suggestion. Hard gates (`DO NOT proceed to step N until...`) survive tightening; soft suggestions get deleted, and the agent skips the check. If a hedge is load-bearing, rewrite it as an imperative. If not, delete the sentence.
 
 ---
 
@@ -100,10 +100,10 @@ After:
 
 These survive every pass:
 
-- **Imperatives**: "DO NOT", "MUST", "ALWAYS", "NEVER". Tightening these into hedges is a defect, not a polish.
+- **Imperatives**: `DO NOT`, `MUST`, `ALWAYS`, `NEVER`. Turning them into hedges is a defect.
 - **Numeric thresholds**: line counts, char limits, timeouts. Keep the number.
-- **Negative scope**: "Do not use for…". This is triggering-critical.
-- **Gate conditions** in Pipeline skills. See [Gate Test](./patterns.md#5-pipeline).
+- **Negative scope**: "Do not use for...". This is triggering-critical.
+- **Gate conditions** in Pipeline skills. See the [Gate Test](./patterns.md#5-pipeline).
 - **Safety wording** the user added on purpose. When in doubt, preserve and ask.
 
 If a tightening edit removes any of the above, revert it.
@@ -112,12 +112,12 @@ If a tightening edit removes any of the above, revert it.
 
 ## When Tightening Is the Wrong Tool
 
-Skip tightening and escalate to a structural revision when:
+Skip tightening and escalate to structural revision when:
 
-- SKILL.md is > 500 lines. Word tightening will not save it; apply progressive disclosure first.
+- `SKILL.md` is > 500 lines. Word tightening will not save it; apply progressive disclosure first.
 - A whole section is generic LLM knowledge (PDF-is-a-format prose). Delete it; do not polish it.
-- Sections repeat the same rule. Merge sections; do not tighten both.
-- The skill claims a pattern its body does not implement. Fix pattern drift first; tightened drift is still drift.
+- Sections repeat the same rule. Merge them; do not tighten both.
+- The skill claims a pattern its body does not implement. Fix drift first; tightened drift is still drift.
 
 Tightening is the **last** polish move, not the first.
 
