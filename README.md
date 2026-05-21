@@ -5,6 +5,7 @@ Reusable Agent Skills for coding-agent workflows.
 ## Skills
 
 - `improve-agents-md` - create, review, or rewrite root `AGENTS.md` / `CLAUDE.md` instruction files.
+- `extract-design-md` - extract `DESIGN.md` from an existing project's styles, resources, components, and screens.
 - `create-design-md` - create or substantially rewrite a `DESIGN.md` visual-identity contract.
 - `apply-design-md` - implement UI from an existing `DESIGN.md` using project styling conventions.
 - `review-design-md` - lint, review, or compare `DESIGN.md` files for structure, contrast, token quality, and regressions.
