@@ -9,6 +9,7 @@ Reusable Agent Skills for coding-agent workflows.
 - `create-design-md` - create or substantially rewrite a `DESIGN.md` visual-identity contract.
 - `apply-design-md` - implement UI from an existing `DESIGN.md` using project styling conventions.
 - `review-design-md` - lint, review, or compare `DESIGN.md` files for structure, contrast, token quality, and regressions.
+- `polish-skill-md` - refine, lint, or rewrite an existing `SKILL.md` for triggering, pattern fidelity, and progressive disclosure.
 
 
 
