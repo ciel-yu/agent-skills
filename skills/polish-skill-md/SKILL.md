@@ -1,17 +1,11 @@
 ---
 name: polish-skill-md
-description: 'Use when refining, polishing, reviewing, linting, or rewriting an existing SKILL.md so it triggers reliably and stays concise. Applies the five Skill design patterns (Tool Wrapper, Generator, Reviewer, Inversion, Pipeline), the agentskills.io spec, progressive disclosure, and description-triggering best practices. Do NOT use to scaffold a brand-new skill from scratch.'
+description: 'Use when polishing, linting, reviewing, or rewriting an existing SKILL.md: tighten its description, fix pattern drift, split an overgrown manifest into companion files, or audit a skill before publishing. Do not use for brand-new skill scaffolding, general Markdown cleanup, or ordinary code/docs edits.'
 ---
 
 # Polish `SKILL.md`
 
-Refine an existing `SKILL.md` into a **tight, well-triggered, pattern-aligned** skill manifest.
-
-This skill is itself a **Reviewer + Generator + Pipeline**:
-
-- **Reviewer**: grade the target `SKILL.md` against an external rubric.
-- **Generator**: rewrite using a fixed structural template.
-- **Pipeline**: `intake → classify → review → revise → verify`, with a gate between review and revise.
+Rewrite an existing `SKILL.md` into a tighter, better-triggered skill manifest. This skill is a **Reviewer + Generator + Pipeline**: inspect the current manifest against an external rubric, rewrite it to match the template, then verify discovery.
 
 ---
 
@@ -19,58 +13,38 @@ This skill is itself a **Reviewer + Generator + Pipeline**:
 
 Use when the user asks to:
 
-- polish, refine, tighten, lint, or review a `SKILL.md`
-- improve a skill's `description` so it triggers correctly
-- shorten an overgrown `SKILL.md` via progressive disclosure
-- realign a skill to the five Skill design patterns
-- audit an existing skill before publishing
+- polish, refine, tighten, lint, or review an existing `SKILL.md`
+- rewrite a skill `description` so it triggers on the right requests
+- split an overgrown `SKILL.md` into `references/`, `assets/`, or `scripts/`
+- realign a skill to the five design patterns before publishing
 
-Do **not** use to:
+Do **not** use for:
 
-- author a brand-new skill from a blank page (use a scaffolding skill)
-- edit ordinary application code, `AGENTS.md`, or `DESIGN.md` files
+- creating a brand-new skill from a blank page
+- editing ordinary application code, `AGENTS.md`, or `DESIGN.md`
+- generic Markdown cleanup when the file is not a skill manifest
 
 ---
 
 ## Operating Modes
 
-- **`review`** - diagnose only. Produce findings + revision plan. No edits.
-- **`polish`** - apply the revision plan. Edit `SKILL.md` and split reference files.
+- **`review`** - diagnose only. Return findings, section classifications, and a revision plan. Do not edit files.
+- **`polish`** - apply the revision plan. Edit `SKILL.md` and split content into companion files when needed.
 
 If intent is ambiguous, default to **`review`**.
 
 ---
 
-## The Five Skill Design Patterns
+## Pipeline
 
-Every `SKILL.md` should consciously map to one or more of these. Drift between claimed pattern and actual body is a defect. Most production skills compose 2-3 patterns.
+`intake → classify → review ──[GATE: in review mode stop after the plan; in polish mode proceed only if no open questions remain]──▶ revise → verify`
 
-| Pattern | Purpose | Signal it applies | Directories |
-|---|---|---|---|
-| **Tool Wrapper** | Encapsulate an API / library / CLI surface | Skill is "how to use X"; value is recall | `references/` |
-| **Generator** | Produce structured artifacts from a template | Skill outputs a fixed-shape document | `references/` + `assets/` |
-| **Reviewer** | Grade work against an external checklist | Skill is "audit / lint / critique X" | `references/` (+ optional `scripts/`) |
-| **Inversion** | Interview the user before acting | Skill needs context the user holds | `assets/` (+ optional `references/`) |
-| **Pipeline** | Chain the above with gate conditions | Skill has ordered phases with checkpoints | composes others |
-
-Directory mismatch (e.g. Generator with no `assets/`, Pipeline with no gates) is a drift signal.
-
-Full pattern guidance, public examples, and the Gate Test: [references/patterns.md](./references/patterns.md). Source citations: [references/sources.md](./references/sources.md).
-
----
-
-## Pipeline (with gate)
-
-```
-intake → classify → review ──[GATE: user confirms plan in `review` mode]──▶ revise → verify
-```
-
-1. **intake** - read the target `SKILL.md` and any `references/` siblings.
-2. **classify** - identify which of the five patterns the skill claims and which it actually implements.
-3. **review** - score against [references/rubric.md](./references/rubric.md). Produce a keep / tighten / split / delete plan.
-4. **GATE** - in `review` mode, stop here and return the plan. In `polish` mode, proceed only if the plan is unambiguous; otherwise downgrade to `review` and ask.
-5. **revise** - apply edits using the structural template in [references/workflow.md](./references/workflow.md).
-6. **verify** - run the final checks listed below.
+1. **Intake** - read the target `SKILL.md` and list sibling `references/`, `assets/`, and `scripts/` files.
+2. **Classify** - compare the skill's claimed pattern(s) with the body it actually implements.
+3. **Review** - apply the rubric and produce a keep / tighten / split / delete plan.
+4. **Gate** - in `review` mode, stop and return the plan. In `polish` mode, proceed only if the plan is unambiguous; otherwise downgrade to `review` and ask.
+5. **Revise** - rewrite the manifest to match the workflow template and move overflow into companion files.
+6. **Verify** - run the checklist and confirm discovery.
 
 ---
 
@@ -78,11 +52,11 @@ intake → classify → review ──[GATE: user confirms plan in `review` mode]
 
 Load on demand:
 
-1. **Five patterns, examples, Gate Test:** [references/patterns.md](./references/patterns.md) - load during `classify`.
-2. **Review rubric and severity order:** [references/rubric.md](./references/rubric.md) - load during `review`.
-3. **Polish workflow and SKILL.md template:** [references/workflow.md](./references/workflow.md) - load during `revise`.
-4. **Word-tightening rules:** [references/word-tightening.md](./references/word-tightening.md) - load during `revise`, after structural fixes, before final verification.
-5. **Source citations:** [references/sources.md](./references/sources.md) - load only if defending a claim or escalating a finding.
+1. **Pattern mapping and Gate Test:** [references/patterns.md](./references/patterns.md) - load during `classify`.
+2. **Severity order and review checklist:** [references/rubric.md](./references/rubric.md) - load during `review`.
+3. **Revision order and SKILL.md template:** [references/workflow.md](./references/workflow.md) - load during `revise`.
+4. **Filler / vocabulary tightening:** [references/word-tightening.md](./references/word-tightening.md) - load after structural edits, before final verification.
+5. **Source citations:** [references/sources.md](./references/sources.md) - load only if you need to defend a claim or escalate a finding.
 
 Always run `classify` before `review`. Always run `review` before `revise`.
 
@@ -90,15 +64,13 @@ Always run `classify` before `review`. Always run `review` before `revise`.
 
 ## Core Rules
 
-- **Description carries triggering.** It is the only field the agent sees at selection time. Imperative phrasing, user-intent framing, ≤ 1024 chars. See [references/rubric.md](./references/rubric.md#description).
-- **SKILL.md ≤ ~500 lines / ~5,000 tokens.** Overflow → progressive disclosure into `references/`, `assets/`, or `scripts/`.
-- **Add what the agent lacks; omit what it already knows.** No PDF-is-a-format prose.
-- **One default, brief alternatives.** Never a menu of equal options.
-- **Procedures over declarations.** Teach a method, not a one-off answer.
-- **Pattern fidelity.** If the skill claims Reviewer, it must reference an external checklist, not embed grading prose inline.
-- **Pointers over copies.** Link to reference files, scripts, and external docs.
-- **Tighten last, not first.** After structural fixes are settled, apply [references/word-tightening.md](./references/word-tightening.md) to cut filler, hedges, and weak vocabulary without changing imperatives, numeric thresholds, or gate conditions.
-- **Preserve the skill's `name`** unless the user explicitly asks to rename.
+- **Description drives triggering.** Write for user intent, not implementation details. Keep it imperative, concrete, and ≤ 1024 chars. Include both positive triggers and negative scope.
+- **Preserve the skill name.** Do not rename `name` unless the user explicitly asks.
+- **Fix drift before style.** Pattern drift, broken gates, and missing load cues outrank wording polish.
+- **Use progressive disclosure.** Keep `SKILL.md` concise; move overflow into `references/`, `assets/`, or `scripts/` and add explicit load cues.
+- **Keep one default.** Do not present menus of equal options.
+- **Tighten last.** Do not shorten away imperatives, numeric thresholds, gates, or negative scope.
+- **Point instead of copying.** Prefer reference files, templates, scripts, and source links over duplicated prose.
 
 ---
 
@@ -108,12 +80,12 @@ Always run `classify` before `review`. Always run `review` before `revise`.
 
 Return:
 
-- declared vs actual pattern(s)
-- description triggering analysis (too narrow / too broad / well-scoped)
+- claimed vs actual pattern(s)
+- description triggering analysis
 - rubric findings, ordered by severity
-- keep / tighten / split / delete classification per section
-- proposed new structure (SKILL.md outline + companion files)
-- explicit open questions blocking `polish`
+- keep / tighten / split / delete classification for each major section
+- proposed new structure (`SKILL.md` outline + companion files)
+- open questions blocking `polish`
 
 Do **not** edit files.
 
@@ -121,26 +93,26 @@ Do **not** edit files.
 
 Deliver:
 
-- a rewritten `SKILL.md` matching the template in [references/workflow.md](./references/workflow.md)
-- new or updated files under `references/` / `assets/` / `scripts/` as required
-- a short changelog: what was kept, tightened, split, deleted, and why
+- a rewritten `SKILL.md` that matches the template in [references/workflow.md](./references/workflow.md)
+- new or updated `references/`, `assets/`, or `scripts/` files when the plan requires them
+- a short changelog covering what was kept, tightened, split, or deleted, and why
 - the verification checklist below, ticked
 
 ---
 
-## Verification (run before declaring done)
+## Verification
 
-- [ ] YAML front matter has `name` (kebab-case) and `description` (≤ 1024 chars, imperative).
-- [ ] `description` lists concrete trigger phrases and at least one negative scope ("do not use for…").
-- [ ] SKILL.md is ≤ ~500 lines.
-- [ ] Every `references/` file is linked from SKILL.md with an explicit *when to load* cue.
-- [ ] Each major section maps to one of the five patterns, or is explicitly meta (Use When / Modes / Verification).
-- [ ] No giant inline code dumps that belong in `scripts/` or `assets/`.
-- [ ] No menu-of-equals; every choice has a default.
-- [ ] Discovery sanity check: `npx skills add "<repo-root>" --list` shows the polished skill.
+- [ ] YAML front matter has `name` (kebab-case) and `description` (imperative, ≤ 1024 chars).
+- [ ] `description` names concrete trigger contexts and at least one negative scope.
+- [ ] `SKILL.md` stays within the repo target size and pushes overflow to companion files.
+- [ ] Every companion file is linked from `SKILL.md` with a when-to-load cue.
+- [ ] Every major section maps to Reviewer, Generator, Pipeline, or explicit meta guidance.
+- [ ] No giant inline templates or scripts remain in `SKILL.md`.
+- [ ] No menu of equal options remains; the default path is obvious.
+- [ ] `npx skills add "<repo-root>" --list` discovers the polished skill.
 
 ---
 
 ## Final Standard
 
-Result: a `SKILL.md` that a cold agent can read once, classify in seconds, and execute without rereading. Pattern-aligned, trigger-tight, progressively disclosed.
+Result: a `SKILL.md` a cold agent can classify quickly, execute in order, and polish without rereading the whole directory.
