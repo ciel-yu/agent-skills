@@ -27,8 +27,8 @@ Do not use outside UI or styling work.
 
 Load as needed:
 
-1. [Implementation workflow](./reference/implementation-workflow.md)
-2. [Mapping patterns](./reference/mapping-patterns.md)
+1. [Implementation workflow](./references/implementation-workflow.md)
+2. [Mapping patterns](./references/mapping-patterns.md)
 
 Read `DESIGN.md` before UI edits. If several exist, use the nearest file unless the user names one.
 

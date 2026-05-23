@@ -37,9 +37,9 @@ Do not use when the user wants a new brand direction rather than current-state e
 
 Load as needed:
 
-1. [Extraction workflow](./reference/extraction-workflow.md)
-2. [Source map](./reference/source-map.md)
-3. [Normalization rules](./reference/normalization-rules.md)
+1. [Extraction workflow](./references/extraction-workflow.md)
+2. [Source map](./references/source-map.md)
+3. [Normalization rules](./references/normalization-rules.md)
 
 Write `DESIGN.md` only after auditing source values. Mark inferred rationale as inferred.
 

@@ -48,10 +48,10 @@ If intent is ambiguous, default to **`analyze`**.
 
 Load as needed:
 
-1. **Core methodology:** [reference/methodology.md](./reference/methodology.md)
-2. **Analyze mode output contract:** [reference/analyze-mode.md](./reference/analyze-mode.md)
-3. **Rewrite mode workflow:** [reference/rewrite-mode.md](./reference/rewrite-mode.md)
-4. **Quality rubric and anti-patterns:** [reference/quality-rubric.md](./reference/quality-rubric.md)
+1. **Core methodology:** [references/methodology.md](./references/methodology.md)
+2. **Analyze mode output contract:** [references/analyze-mode.md](./references/analyze-mode.md)
+3. **Rewrite mode workflow:** [references/rewrite-mode.md](./references/rewrite-mode.md)
+4. **Quality rubric and anti-patterns:** [references/quality-rubric.md](./references/quality-rubric.md)
 
 Always classify sections before proposing or rewriting.
 

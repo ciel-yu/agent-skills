@@ -27,8 +27,8 @@ Do not use for general UI code review unless DESIGN.md is central.
 
 Load as needed:
 
-1. [Review workflow](./reference/review-workflow.md)
-2. [Quality rubric](./reference/quality-rubric.md)
+1. [Review workflow](./references/review-workflow.md)
+2. [Quality rubric](./references/quality-rubric.md)
 
 Lint:
 

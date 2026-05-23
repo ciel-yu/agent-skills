@@ -32,8 +32,8 @@ Do not use for UI edits unless `DESIGN.md` must change.
 
 Load as needed:
 
-1. [Authoring workflow](./reference/authoring-workflow.md)
-2. [Token schema](./reference/token-schema.md)
+1. [Authoring workflow](./references/authoring-workflow.md)
+2. [Token schema](./references/token-schema.md)
 
 Create the file when context is sufficient. Ask only for missing brand constraints that change token choices.
 
