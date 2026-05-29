@@ -25,6 +25,8 @@ Remove:
 - instructions for one rare task
 - repeated warnings written three different ways
 - aspirational guidance with no operational meaning
+- abstract "reasoning framework / chain of thought / cognitive pathway / mental trajectory" sections — if the underlying content is real, reframe it as **thinking discipline**: concrete, observable rules (preconditions, forbidden shortcuts, verification steps), and fold them into Default Workflow / Boundaries / Current Direction / conditional blocks rather than a dedicated section
+- a `## Thinking Discipline` (or similarly named) heading: the heading itself is gravity that attracts abstract prose back over time
 
 ---
 

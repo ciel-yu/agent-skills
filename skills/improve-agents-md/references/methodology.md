@@ -10,7 +10,7 @@ Answer:
 |-----------|----------------------|
 | **WHY** | What the repository is for; key subsystem purpose |
 | **WHAT** | Tech stack, repository map, module boundaries |
-| **DIRECTION** | Current canonical patterns, legacy-only areas, conflict resolution |
+| **DIRECTION** | Which pattern is canonical for new work, which is legacy-only, how to resolve conflicts (= *Which* + a time vector: where the codebase is heading) |
 | **HOW** | Default commands, verification flow, workflow constraints |
 
 If content does not help most tasks, it likely does **not** belong in root.
@@ -112,6 +112,27 @@ Guidelines:
 You may generate a draft, but the final root file should be curated.
 
 Every root line affects every session.
+
+### 9. Thinking discipline is not a section
+
+Concrete, rule-shaped "thinking discipline" (e.g. *reproduce with a failing test first*, *do not copy from `legacy/` for new work*, *ask before irreversible changes*) is welcome — but it belongs **inside existing sections**, not under a new `## Thinking Discipline` / `## Reasoning Framework` heading.
+
+Before admitting a discipline rule into root, it must pass three filters:
+
+1. **Universal** — changes behavior on *most* tasks (otherwise → conditional block or companion doc).
+2. **Not tool-replaceable** — cannot be enforced by a linter, formatter, hook, typechecker, or test (otherwise → tooling).
+3. **Not already model-default** — reverses a plausible default behavior (otherwise → noise; the model already does it).
+
+Placement rules:
+
+| Discipline shape | Goes into |
+|---|---|
+| Ordered steps (reproduce → minimal change → verify) | `## Default Workflow` |
+| Hard "do not cross" lines | `## Boundaries` |
+| Canonical-vs-legacy choices | `## Current Direction` |
+| Task-scoped rules | `<important if="...">` conditional block |
+
+Heuristic: *if a rule needs the heading `## Thinking Discipline` to justify its existence, it is not yet concrete enough.* Truly concrete discipline self-sorts into the sections above.
 
 ---
 
