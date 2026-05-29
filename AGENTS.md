@@ -20,7 +20,7 @@ When adding or changing a skill:
 3. Put concise, tool-oriented instructions in `SKILL.md`.
 4. Move narrow or long-form guidance to sibling docs such as `references/*.md`.
 5. Keep examples, scripts, and resources inside the skill directory.
-6. Verify discovery: `npx skills add "T:\agent-skills" --list`.
+6. Verify discovery: `npx skills add <repo-root> --list`.
 
 ## Boundaries
 
