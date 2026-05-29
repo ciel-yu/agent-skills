@@ -19,3 +19,16 @@ Classify each surface element as:
 - **Dead** - exported or documented but unused in the migration scope.
 
 Do not define the surface from exports alone; confirm it against real consumers.
+
+---
+
+## Surface element template
+
+Use when building the surface map:
+
+```md
+## Semantic Surface Map
+| Surface element | Class | Entry point | Evidence | Notes |
+|---|---|---|---|---|
+| <name / path> | Required / Relied-on incidental / Ambiguous / Dead | <file:line> | <source> | |
+```

@@ -41,8 +41,8 @@ If the technology stays materially the same and only internals change, use `sema
 
 ## Operating Modes
 
-- **`audit`** — map the behavioral contract, inventory breaking changes, trace consumers, recommend a migration strategy; do not edit files
-- **`migrate`** — implement the migration, add compatibility layers where needed, migrate cohorts, prove behavioral equivalence
+- **`audit`** - map the behavioral contract, inventory breaking changes, trace consumers, recommend a migration strategy; do not edit files
+- **`migrate`** - implement the migration, add compatibility layers where needed, migrate cohorts, prove behavioral equivalence
 
 Default to **`audit`** when intent is ambiguous.
 

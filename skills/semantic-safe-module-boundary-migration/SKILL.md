@@ -76,6 +76,7 @@ Load on demand:
 3. **During `Choose Migration Shape` and `Implement Target Boundary`:** [references/migration-workflow.md](./references/migration-workflow.md)
 4. **During `Verify Surface Equivalence`:** [references/equivalence-checks.md](./references/equivalence-checks.md)
 5. **During `Cut Over`:** [references/cutover-checklist.md](./references/cutover-checklist.md)
+6. **Only if `Surface-Break Gate` opens:** [references/surface-break-gate.md](./references/surface-break-gate.md)
 
 Use [assets/migration-plan-template.md](./assets/migration-plan-template.md) as the output format for `audit` mode.
 

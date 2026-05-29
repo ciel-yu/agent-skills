@@ -21,3 +21,20 @@ Avoid:
 - simultaneous file moves plus broad API edits
 - changing import paths and behavior in one undocumented step
 - deleting the old module before all discovery paths are checked
+
+---
+
+## Migration shape note template
+
+Use in planning output:
+
+```md
+## Migration Shape
+- Chosen shape:
+- Why this shape:
+- Bridge(s) introduced:
+- Named owner(s):
+- Removal condition(s):
+- Caller impact:
+- Rollback path:
+```
