@@ -18,7 +18,32 @@ Do not start from the clean architecture you wish existed. Start from what the s
 
 ---
 
-## 2. Extract the semantic contract
+## 2. Detect intent and state the preservation boundary
+
+Before planning the replacement, infer intent from evidence:
+
+1. explicit user constraints
+2. tests and fixtures
+3. public contracts
+4. call sites and downstream usage
+5. docs and ADRs
+6. comments and naming
+7. implementation details
+
+Then state which layers must remain stable:
+
+- behavior
+- contract
+- domain meaning
+- names
+
+If confidence is low or the evidence conflicts, stop and ask instead of guessing.
+
+---
+
+## 3. Extract the semantic contract
+
+Load [semantic-contract.md](./semantic-contract.md) and [legacy-debt-handling.md](./legacy-debt-handling.md).
 
 Write down the contract in concrete terms:
 
@@ -32,28 +57,24 @@ Write down the contract in concrete terms:
 - timing or consistency expectations when relevant
 - canonical domain terms and names that must remain stable
 
-If you cannot state the contract, you are not ready to rewrite the implementation.
+Classify every notable legacy behavior as **Intentional**, **Relied-upon accidental**, **Ambiguous**, or **Dead** before porting it.
+
+If you cannot state the contract and classify the key behaviors, you are not ready to rewrite the implementation.
 
 ---
 
-## 3. Choose a replacement seam
+## 4. Choose a replacement seam
+
+Load [seam-selection.md](./seam-selection.md) for seam choice.
 
 Prefer a seam that allows new code to live mostly outside the legacy implementation.
-
-Common seams:
-
-- new module behind the same interface
-- façade in front of old and new implementations
-- adapter translating old call shape to new module
-- feature-flagged path
-- branch-by-abstraction
-- strangler path for a subsystem
+Default to a new module behind the same interface. Escalate to façade, adapter, branch-by-abstraction, strangler path, or feature flag only when the migration conditions require it.
 
 Avoid editing inside tangled legacy internals unless no clean seam exists.
 
 ---
 
-## 4. Open the ADR gate if needed
+## 5. Open the ADR gate if needed
 
 Stop and document the decision before implementation if the rewrite changes:
 
@@ -67,7 +88,7 @@ If none of those change, continue as semantic-preserving replacement work.
 
 ---
 
-## 5. Implement the new path first
+## 6. Implement the new path first
 
 In `replace` mode:
 
@@ -81,9 +102,11 @@ Prefer parallel implementation plus cutover over invasive surgery.
 
 ---
 
-## 6. Verify equivalence
+## 7. Verify equivalence
 
-Use one or more:
+Load [equivalence-checks.md](./equivalence-checks.md) for evidence selection.
+
+Match checks to the preserved layers first, then choose one or more:
 
 - existing tests that still pass
 - new characterization tests
@@ -92,11 +115,12 @@ Use one or more:
 - API or event transcript comparison
 - manual scenario matrix when automation is impossible
 
+Record which preserved layers each check covers.
 Do not say "equivalent" without evidence.
 
 ---
 
-## 7. Cut over and document residue
+## 8. Cut over and document residue
 
 After equivalence is credible:
 
