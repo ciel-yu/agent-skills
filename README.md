@@ -11,9 +11,9 @@ Reusable Agent Skills for coding-agent workflows.
 - `apply-design-md` - implement UI from an existing `DESIGN.md` using project styling conventions.
 - `review-design-md` - lint, review, or compare `DESIGN.md` files for structure, contrast, token quality, and regressions.
 - `polish-skill-md` - refine, lint, or rewrite an existing `SKILL.md` for triggering, pattern fidelity, and progressive disclosure.
-- `semantic-safe-refactor` - refactor by replacing legacy code with new modules while preserving semantic contracts; uses ADRs only when semantics or architecture intentionally change.
-- `semantic-surface-module-migration` - migrate or split modules by preserving caller-visible semantic surface: discovery paths, API shape, behavior, errors, and side effects.
-
+- `semantic-safe-implementation-refactor` - replace brittle implementations behind a materially stable surface and technology model; preserve behavior, contracts, and domain meaning.
+- `semantic-safe-module-boundary-migration` - move, split, or consolidate modules while keeping the caller-visible surface materially stable: discovery paths, exports, behavior, errors, and side effects.
+- `semantic-safe-technology-migration` - migrate frameworks, runtimes, versions, module systems, or programming models while allowing technical surface change but preserving behavioral and domain semantics.
 
 
 ## References

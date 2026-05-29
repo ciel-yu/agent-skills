@@ -1,11 +1,11 @@
 ---
-name: semantic-safe-refactor
-description: "Use when the user wants to replace legacy code with a clean implementation without changing behavior, public contracts, or domain meaning. Triggers: rewrite a messy module, refactor without hacking old code, reimplement a service behind the same interface, or extract a cleaner subsystem behind an existing adapter or facade. Define a semantic contract first; open an ADR only if the rewrite intentionally changes architecture or externally visible semantics. Do not use for tiny local bug fixes, speculative rewrites with no contract baseline, or redesigns that intentionally change behavior."
+name: semantic-safe-implementation-refactor
+description: "Use when the primary change is replacing an implementation while keeping the public surface and technology model materially stable. Triggers: rewrite a messy service behind the same interface, replace legacy logic with a clean module, reimplement a subsystem behind an existing contract, or introduce an adapter or facade so a new implementation can take over. Do not use when the main work is moving module, package, or caller boundaries (use `semantic-safe-module-boundary-migration`) or when a framework, runtime, version, module system, or programming model change is the main source of risk (use `semantic-safe-technology-migration`)."
 ---
 
-# Semantic-Safe Refactor
+# Semantic-Safe Implementation Refactor
 
-This skill is a **Pipeline + Reviewer** for semantic-preserving replacement refactors. Refactor by **replacing implementations, not patching them in place**: detect intent, extract the semantic contract, choose a replacement seam, implement a new path, and prove equivalence before cutover. Use ADRs only when the rewrite intentionally changes architecture or externally visible semantics.
+This skill is a **Pipeline + Reviewer** for semantic-preserving implementation replacement. Choose it only when **implementation is the primary thing changing** and the external surface, module boundary, and technology model are intended to stay materially stable.
 
 ---
 
@@ -13,12 +13,11 @@ This skill is a **Pipeline + Reviewer** for semantic-preserving replacement refa
 
 Use when the user asks to:
 
-- refactor a messy subsystem without changing what it means or does externally
-- replace legacy code with a new module while preserving behavior and domain semantics
-- extract a cleaner implementation behind an existing interface, route, schema, event, or API contract
-- rewrite a component, service, handler, or workflow instead of layering more hacks onto old code
-- migrate from one implementation shape to another with adapters, shims, or staged cutover
-- implement new code from the semantics of existing code rather than copying its structure
+- replace brittle legacy logic with a cleaner implementation behind the same interface or contract
+- rewrite a component, service, handler, or workflow without intentionally changing its public behavior
+- extract a cleaner subsystem behind an existing route, schema, event, adapter, or facade
+- introduce a new implementation path and cut traffic over after equivalence is proven
+- reimplement from observed semantics instead of copying the old control flow
 
 Do **not** use for:
 
@@ -26,8 +25,17 @@ Do **not** use for:
 - speculative rewrites when the existing semantic contract has not been established
 - redesigns that intentionally change product behavior, domain meaning, or public contracts without an explicit decision
 - style-only cleanup or mechanical formatting changes
-- module reorganization, moves, or ownership changes where the goal is structural rather than implementational (use `semantic-surface-module-migration`)
-- migrations where the technical surface (API names, import syntax, framework conventions) intentionally changes (use `tech-migration`)
+- module, package, path, or ownership moves where caller migration is the main work (use `semantic-safe-module-boundary-migration`)
+- framework, runtime, library version, module system, or programming-model migrations where the technical change itself drives the plan (use `semantic-safe-technology-migration`)
+
+## Boundary Test
+
+Choose this skill only if the task can be summarized as:
+
+> Keep the surface materially stable; replace the implementation safely.
+
+If the task is mainly about **where a module lives or how callers reach it**, use `semantic-safe-module-boundary-migration`.
+If the task is mainly about **upgrading or switching technology**, use `semantic-safe-technology-migration`.
 
 ---
 

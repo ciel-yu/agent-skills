@@ -1,4 +1,4 @@
-# Semantic Surface Module Migration Plan
+# Semantic-Safe Module Boundary Migration Plan
 
 ## 1. Target
 

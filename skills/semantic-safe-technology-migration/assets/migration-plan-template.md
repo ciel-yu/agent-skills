@@ -1,11 +1,11 @@
-# Tech Migration Plan
+# Semantic-Safe Technology Migration Plan
 
 Use this template for `audit` mode output. Fill every section; mark unknowns explicitly rather than leaving them blank.
 
 ---
 
 ```md
-# Tech Migration Plan: <target scope>
+# Semantic-Safe Technology Migration Plan: <target scope>
 
 - Date:
 - Author:

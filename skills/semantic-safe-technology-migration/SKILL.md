@@ -1,11 +1,11 @@
 ---
-name: tech-migration
-description: "Use when migrating code between different technology frameworks, different versions of the same framework, or different code conventions while preserving behavioral and domain semantics. Triggers: upgrade a major framework version (React 16 → 18, Angular 12 → 15), migrate between libraries or runtimes (Express → Fastify, Webpack → Vite), convert code conventions across a codebase (CommonJS → ESM, callbacks → async/await, class components → hooks). The technical surface intentionally changes; the goal is to preserve what the code means and does. Do not use when the public surface must stay identical (use semantic-surface-module-migration) or when only internals change behind a stable interface (use semantic-safe-refactor)."
+name: semantic-safe-technology-migration
+description: "Use when the primary change is the technology model itself—framework, runtime, major version, module system, or programming model—and behavioral or domain semantics must survive an intentionally changing technical surface. Triggers: upgrade React 16 → 18, migrate Express → Fastify, convert CommonJS → ESM, or move callbacks → async/await when compatibility behavior changes. Do not use when callers must keep the same module surface (use `semantic-safe-module-boundary-migration`) or when the technology stays materially the same and you are only replacing internals behind a stable interface (use `semantic-safe-implementation-refactor`)."
 ---
 
-# Tech Migration
+# Semantic-Safe Technology Migration
 
-This skill is a **Pipeline + Reviewer** for technology migrations where the **surface intentionally changes** but behavioral and domain semantics must be preserved. Unlike `semantic-safe-refactor` (surface stable, internals change) and `semantic-surface-module-migration` (surface preserved, boundary moves), tech migration treats surface transformation as expected and guards behavioral equivalence as the single invariant.
+This skill is a **Pipeline + Reviewer** for framework, runtime, version, module-system, and programming-model migrations where the technical surface is expected to change. Choose it only when **technology change is the primary source of risk** and migration guides, breaking changes, codemods, polyfills, or compatibility bridges drive the plan.
 
 ---
 
@@ -13,19 +13,29 @@ This skill is a **Pipeline + Reviewer** for technology migrations where the **su
 
 Use when the user asks to:
 
-- upgrade a major framework or library version with breaking API changes
-- migrate from one framework or runtime to another
-- convert code conventions across a codebase (module system, async pattern, component model)
-- replace a third-party dependency with an alternative while preserving behavior
-- adopt a new language feature or compilation target (ES5 → ES2022, Python 2 → 3)
+- upgrade a major framework, library, or runtime version with breaking technical changes
+- migrate between frameworks, runtimes, module systems, or programming models
+- replace a third-party dependency with an alternative when compatibility behavior must be preserved across surface changes
+- adopt new language or runtime targets that affect execution, discovery, compatibility, or lifecycle behavior
+- use official migration guides, codemods, shims, polyfills, or dual-version coexistence as part of the plan
 
 Do **not** use for:
 
-- migrations where callers must not see any surface change (use `semantic-surface-module-migration`)
-- internal rewrites behind a fully stable interface (use `semantic-safe-refactor`)
+- migrations where callers must not see a meaningful module-surface or discovery-path change (use `semantic-safe-module-boundary-migration`)
+- internal rewrites behind a materially stable surface and technology model (use `semantic-safe-implementation-refactor`)
 - greenfield rewrites with no behavioral baseline to preserve
-- purely mechanical renames or moves with no behavioral risk
-- cases where both module structure and implementation need to change simultaneously without a tech surface change — compose `semantic-surface-module-migration` (for the boundary) with `semantic-safe-refactor` (for the implementation) instead
+- purely mechanical formatting, lint, naming, or move-only changes with no behavior or compatibility risk
+- cases where there is no real technology migration and the work is only structural or implementational
+
+## Boundary Test
+
+Choose this skill only if the task can be summarized as:
+
+> The technology is changing; the behavior must survive.
+
+If framework, runtime, version, module-system, or programming-model change is the primary risk, use this skill even when implementation and boundary also move.
+If the technical surface should stay materially the same for callers, use `semantic-safe-module-boundary-migration`.
+If the technology stays materially the same and only internals change, use `semantic-safe-implementation-refactor`.
 
 ---
 

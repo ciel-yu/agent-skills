@@ -1,11 +1,11 @@
 ---
-name: semantic-surface-module-migration
-description: "Use when the user wants to move, split, consolidate, or replace a code module by preserving its semantic surface: import paths, callable/API shape, data contracts, side effects, errors, and caller expectations. Triggers: migrate a module to a new package, extract a subsystem behind a stable facade, move callers off a legacy path, or split a god module without breaking consumers. Do not use for tiny local edits, purely mechanical renames with no migration risk, or intentional public API redesign without an explicit surface-change decision."
+name: semantic-safe-module-boundary-migration
+description: "Use when the primary change is a module, package, path, or ownership boundary while the caller-visible surface must remain materially stable. Triggers: move a module to a new package, split or consolidate modules behind the same exports, migrate callers off a legacy import path, or introduce a facade or re-export while ownership changes. Do not use when the main work is rewriting internals behind a stable boundary (use `semantic-safe-implementation-refactor`) or when a framework, runtime, version, module system, or programming model change intentionally alters the technical surface (use `semantic-safe-technology-migration`)."
 ---
 
-# Semantic Surface Module Migration
+# Semantic-Safe Module Boundary Migration
 
-This skill is a **Pipeline + Reviewer** for module migrations driven by semantic surface, not file layout. Migrate by first defining what callers observe and rely on, then move implementation and callers in stages while preserving that surface or explicitly gating any intentional break.
+This skill is a **Pipeline + Reviewer** for module, package, and ownership-boundary migrations driven by caller-visible semantic surface. Choose it only when **boundary is the primary thing changing** and callers should keep seeing materially the same discovery path, exports, behavior, errors, and side effects.
 
 ---
 
@@ -14,10 +14,10 @@ This skill is a **Pipeline + Reviewer** for module migrations driven by semantic
 Use when the user asks to:
 
 - move a module to a new package, directory, layer, or ownership boundary without breaking callers
-- split a large module into smaller modules while keeping the same public surface
-- consolidate duplicate modules under one canonical surface and migrate callers safely
-- migrate consumers from a legacy path, adapter, or facade to a new module boundary in stages
-- preserve how a module is discovered and used even when its storage location or owning boundary changes
+- split a large module into smaller internal modules while keeping the same public entry points
+- consolidate duplicate modules under one canonical boundary and migrate callers safely
+- migrate consumers from a legacy import path, adapter, or facade to a new boundary in stages
+- preserve discovery, exports, signatures, errors, and side effects while ownership or location changes
 
 Do **not** use for:
 
@@ -25,8 +25,18 @@ Do **not** use for:
 - purely mechanical renames or moves with no meaningful semantic-risk surface
 - brand-new module design with no existing callers or compatibility constraints
 - intentional public API or domain-contract redesign without an explicit decision to change the surface
-- implementation rewrites where the goal is cleaner logic behind a stable interface with no structural change (use `semantic-safe-refactor`)
-- migrations where the technical surface intentionally changes due to a framework upgrade or convention change (use `tech-migration`)
+- cleaner-logic rewrites behind a stable boundary with no structural migration (use `semantic-safe-implementation-refactor`)
+- framework, runtime, version, module system, or programming-model migrations where the technical surface itself changes (use `semantic-safe-technology-migration`)
+
+## Boundary Test
+
+Choose this skill only if the task can be summarized as:
+
+> Keep the caller-visible surface materially stable; change the module boundary safely.
+
+If the main question is **where this module should live or how callers should reach it**, use this skill.
+If the main question is **how to rewrite the logic**, use `semantic-safe-implementation-refactor`.
+If the main question is **how to upgrade or switch technology**, use `semantic-safe-technology-migration`.
 
 ---
 

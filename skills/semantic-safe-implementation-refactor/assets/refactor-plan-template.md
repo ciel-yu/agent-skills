@@ -1,11 +1,11 @@
-# Refactor Plan
+# Semantic-Safe Implementation Refactor Plan
 
 Use this template for `audit` mode output. Fill every section; mark unknowns explicitly rather than leaving them blank.
 
 ---
 
 ```md
-# Refactor Plan: <target module / service / subsystem>
+# Semantic-Safe Implementation Refactor Plan: <target module / service / subsystem>
 
 - Date:
 - Author:
