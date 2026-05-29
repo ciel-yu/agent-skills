@@ -11,6 +11,7 @@ Reusable Agent Skills for coding-agent workflows.
 - `apply-design-md` - implement UI from an existing `DESIGN.md` using project styling conventions.
 - `review-design-md` - lint, review, or compare `DESIGN.md` files for structure, contrast, token quality, and regressions.
 - `polish-skill-md` - refine, lint, or rewrite an existing `SKILL.md` for triggering, pattern fidelity, and progressive disclosure.
+- `semantic-safe-refactor` - refactor by replacing legacy code with new modules while preserving semantic contracts; uses ADRs only when semantics or architecture intentionally change.
 
 
 

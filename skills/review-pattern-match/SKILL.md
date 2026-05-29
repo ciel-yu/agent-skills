@@ -92,7 +92,6 @@ If there are no findings, say so explicitly and still report the score, reviewed
 - [ ] Score includes both total `0-100` and dimension breakdown.
 - [ ] Generic best-practices feedback is excluded unless the pattern document itself requires it.
 - [ ] If the pattern document is too abstract, the review stops and asks clarifying questions instead of grading.
-- [ ] `npx skills add "<repo-root>" --list` discovers `review-pattern-match`.
 
 ---
 
