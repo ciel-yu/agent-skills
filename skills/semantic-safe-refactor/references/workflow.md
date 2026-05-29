@@ -122,11 +122,16 @@ Do not say "equivalent" without evidence.
 
 ## 8. Cut over and document residue
 
+Load [cutover-checklist.md](./cutover-checklist.md) and follow it in order.
+
+Do not switch traffic until the pre-cutover checklist is complete.
+
 After equivalence is credible:
 
 - switch callers to the new path
-- deprecate or remove the old path when safe
-- note residual compatibility shims
-- record deprecated terms, modules, or adapters still present
+- verify under live or representative conditions
+- deprecate or remove the old path when stable
+- record deprecated terms, modules, and adapters still present
+- document debt carry-forwards
 
 If the migration is partial, say so clearly.
