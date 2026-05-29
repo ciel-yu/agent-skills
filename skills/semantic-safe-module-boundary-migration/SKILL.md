@@ -54,7 +54,7 @@ If intent is ambiguous, default to **`audit`**.
 `Intake → Map Semantic Surface → Trace Consumers & Discovery Paths → Choose Migration Shape ──[Surface-Break Gate]──▶ Implement Target Boundary → Migrate Callers by Cohort → Verify Surface Equivalence → Cut Over`
 
 - **Intake** - identify the module, its current location, target location or boundary, caller scope, and any rollout constraints.
-- **Map Semantic Surface** - write down what consumers actually observe: import path, exported names, callable signatures, types or schema shape, sync/async behavior, errors, side effects, ordering, initialization, and any relied-on performance or lifecycle properties.
+- **Map Semantic Surface** - write down what consumers actually observe: import path, exported names, callable signatures, types or schema shape, sync/async behavior, errors, side effects, ordering, initialization, and any relied-on performance or lifecycle properties. When these depend on hidden execution paths or value propagation across modules, trace those paths before moving the boundary.
 - **Trace Consumers & Discovery Paths** - find direct imports, dynamic loading, DI wiring, registries, config references, generated code, tests, docs, and scripts that discover or rely on the surface.
 - **Choose Migration Shape** - prefer the smallest safe shape: stable re-export, facade, adapter, branch-by-abstraction, dual-write/read boundary, or staged caller migration.
 - **Surface-Break Gate** - if the migration changes externally visible surface semantics, shared ownership boundaries, published paths, or data meaning, stop. In `audit`, report the required decision. In `migrate`, **DO NOT** continue until that decision exists.
@@ -73,10 +73,11 @@ Load on demand:
 
 1. **During `Map Semantic Surface`:** [references/surface-audit.md](./references/surface-audit.md)
 2. **During `Trace Consumers & Discovery Paths`:** [references/consumer-mapping.md](./references/consumer-mapping.md)
-3. **During `Choose Migration Shape` and `Implement Target Boundary`:** [references/migration-workflow.md](./references/migration-workflow.md)
-4. **During `Verify Surface Equivalence`:** [references/equivalence-checks.md](./references/equivalence-checks.md)
-5. **During `Cut Over`:** [references/cutover-checklist.md](./references/cutover-checklist.md)
-6. **Only if `Surface-Break Gate` opens:** [references/surface-break-gate.md](./references/surface-break-gate.md)
+3. **When initialization order, side effects, or exported values depend on hidden path structure across modules:** [references/advanced-analysis.md](./references/advanced-analysis.md)
+4. **During `Choose Migration Shape` and `Implement Target Boundary`:** [references/migration-workflow.md](./references/migration-workflow.md)
+5. **During `Verify Surface Equivalence`:** [references/equivalence-checks.md](./references/equivalence-checks.md)
+6. **During `Cut Over`:** [references/cutover-checklist.md](./references/cutover-checklist.md)
+7. **Only if `Surface-Break Gate` opens:** [references/surface-break-gate.md](./references/surface-break-gate.md)
 
 Use [assets/migration-plan-template.md](./assets/migration-plan-template.md) as the output format for `audit` mode.
 
@@ -89,6 +90,7 @@ Read both the current module and representative consumers before choosing the mi
 - **Surface first**: define the semantic surface before editing module boundaries.
 - **Observed behavior outranks file structure**: preserve what callers import, call, receive, and rely on unless an explicit decision says otherwise.
 - **Consumers are evidence**: infer the real surface from call sites, tests, runtime wiring, docs, and generated artifacts, not from exports alone.
+- **Use advanced flow tracing only for hidden surface risks**: trace control-sensitive initialization, exception paths, and value propagation only when they affect caller-observable behavior.
 - **Migrate in cohorts**: group callers by risk and discovery path; do not mix unrelated migrations into one blind sweep.
 - **Bridge minimally**: temporary shims, re-exports, adapters, and facades exist only to preserve the surface during migration.
 - **Keep one canonical target**: after migration, there should be one owning module boundary, even if temporary compatibility paths remain.

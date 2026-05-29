@@ -54,7 +54,7 @@ If intent is ambiguous, default to **`audit`**.
 
 - **Intake** - identify the target surface: file, module, subsystem, handler, service, or flow; find existing tests, docs, contracts, and ADRs first.
 - **Detect Intent & Preservation Boundary** - infer user intent, artifact intent, and system intent from evidence. State which layers must remain stable: behavior, contract, domain meaning, and public names.
-- **Extract Semantic Contract** - map inputs, outputs, invariants, side effects, errors, naming, public/internal boundaries, and observable behavior. Classify legacy behaviors as Intentional, Relied-upon accidental, Ambiguous, or Dead.
+- **Extract Semantic Contract** - map inputs, outputs, invariants, side effects, errors, naming, public/internal boundaries, and observable behavior. For control-sensitive or data-sensitive code, also trace the branch, exception, state-transition, and value-lineage paths that determine observable outcomes. Classify legacy behaviors as Intentional, Relied-upon accidental, Ambiguous, or Dead.
 - **Design Replacement Boundary** - choose the smallest clean seam: new module behind the same interface by default, then façade, adapter, branch-by-abstraction, strangler path, or feature flag when conditions require.
 - **ADR Gate** - if the refactor changes externally visible semantics, shared boundaries, architecture, data meaning, or long-lived contracts, stop. In `audit`, report the ADR requirement. In `replace`, **DO NOT** continue until the decision is recorded.
 - **Implement New Path** - write the replacement code in a new module or isolated path first; touch old code only where needed for seams, adapters, or routing.
@@ -72,10 +72,11 @@ Load on demand:
 1. **During `Detect Intent & Preservation Boundary`:** [references/intent-detection.md](./references/intent-detection.md)
 2. **During `Extract Semantic Contract`:** [references/semantic-contract.md](./references/semantic-contract.md) and [references/legacy-debt-handling.md](./references/legacy-debt-handling.md)
 3. **During `Design Replacement Boundary`:** [references/seam-selection.md](./references/seam-selection.md)
-4. **During `Implement New Path` and cutover planning:** [references/workflow.md](./references/workflow.md)
-5. **During `Verify Semantic Equivalence`:** [references/equivalence-checks.md](./references/equivalence-checks.md)
-6. **During `Cut Over`:** [references/cutover-checklist.md](./references/cutover-checklist.md)
-7. **Only if `ADR Gate` opens:** [references/adr-gate.md](./references/adr-gate.md)
+4. **When legacy behavior depends on branch structure, exception paths, state transitions, or value lineage:** [references/advanced-analysis.md](./references/advanced-analysis.md)
+5. **During `Implement New Path` and cutover planning:** [references/workflow.md](./references/workflow.md)
+6. **During `Verify Semantic Equivalence`:** [references/equivalence-checks.md](./references/equivalence-checks.md)
+7. **During `Cut Over`:** [references/cutover-checklist.md](./references/cutover-checklist.md)
+8. **Only if `ADR Gate` opens:** [references/adr-gate.md](./references/adr-gate.md)
 
 Use [assets/refactor-plan-template.md](./assets/refactor-plan-template.md) as the output format for `audit` mode.
 
@@ -91,6 +92,7 @@ Read the existing implementation before proposing a rewrite. Prefer the smallest
 - **Classify before porting**: mark every notable legacy behavior as Intentional, Relied-upon accidental, Ambiguous, or Dead before the replacement is written.
 - **Replace, do not accrete**: prefer a new module or isolated path over more branches in legacy code.
 - **Contract before code**: extract the semantic contract before choosing abstractions or file layout.
+- **Use flow analysis only when it clarifies semantics**: trace control-sensitive paths and data lineage to preserve observable behavior, not to cargo-cult legacy structure.
 - **Bridge minimally**: touch legacy code only to create seams, adapters, or cutover points.
 - **Prove equivalence**: map evidence to preserved layers; inspection alone is not enough.
 - **Escalate intentional change**: if semantics, boundaries, or architecture change, open or update an ADR.

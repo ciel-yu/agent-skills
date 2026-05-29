@@ -53,7 +53,7 @@ Default to **`audit`** when intent is ambiguous.
 `Intake → Map Behavioral Contract → Inventory Breaking Changes → Trace Consumers ──[Behavioral-Risk Gate]──▶ Choose Migration Strategy → Implement Compatibility Layer → Migrate by Cohort → Verify Behavioral Equivalence → Cut Over`
 
 - **Intake** — identify: source tech + version, target tech + version, scope (file, module, package, repo), rollout constraints, and any coexistence requirements.
-- **Map Behavioral Contract** — extract what must survive the migration: business logic, domain rules, data transformations, error semantics, side effects, user-visible behavior, and any performance or lifecycle guarantees callers depend on. This is the only preservation invariant; the surface is allowed to change.
+- **Map Behavioral Contract** — extract what must survive the migration: business logic, domain rules, data transformations, error semantics, side effects, user-visible behavior, and any performance or lifecycle guarantees callers depend on. For behavior that depends on async ordering, exception paths, scheduler differences, or multi-step value propagation, trace those paths explicitly. This is the only preservation invariant; the surface is allowed to change.
 - **Inventory Breaking Changes** — collect the official migration guide plus discovered gaps; classify every breaking change as Surface-Only (API shape changes, behavior is identical), Behavioral (logic or semantics actually differ), or Ambiguous.
 - **Trace Consumers & Discovery Paths** — find all usages of APIs, imports, patterns, or conventions being migrated; group into cohorts by risk and replaceability.
 - **Behavioral-Risk Gate** — Surface-Only changes proceed. Behavioral or Ambiguous changes stop: in `audit`, report them as decisions required; in `migrate`, **DO NOT** continue until each decision is recorded.
@@ -73,11 +73,12 @@ Load on demand:
 
 1. **During `Map Behavioral Contract`:** [references/behavioral-contract.md](./references/behavioral-contract.md)
 2. **During `Inventory Breaking Changes`:** [references/breaking-change-inventory.md](./references/breaking-change-inventory.md)
-3. **During `Trace Consumers`:** [references/consumer-mapping.md](./references/consumer-mapping.md)
-4. **During `Choose Migration Strategy`:** [references/migration-strategy.md](./references/migration-strategy.md)
-5. **During `Implement Compatibility Layer`:** [references/compatibility-layer.md](./references/compatibility-layer.md)
-6. **During `Verify Behavioral Equivalence`:** [references/equivalence-checks.md](./references/equivalence-checks.md)
-7. **During `Cut Over`:** [references/cutover-checklist.md](./references/cutover-checklist.md)
+3. **When behavior depends on hidden control paths, async ordering, lifecycle transitions, or value lineage:** [references/advanced-analysis.md](./references/advanced-analysis.md)
+4. **During `Trace Consumers`:** [references/consumer-mapping.md](./references/consumer-mapping.md)
+5. **During `Choose Migration Strategy`:** [references/migration-strategy.md](./references/migration-strategy.md)
+6. **During `Implement Compatibility Layer`:** [references/compatibility-layer.md](./references/compatibility-layer.md)
+7. **During `Verify Behavioral Equivalence`:** [references/equivalence-checks.md](./references/equivalence-checks.md)
+8. **During `Cut Over`:** [references/cutover-checklist.md](./references/cutover-checklist.md)
 
 Use [assets/migration-plan-template.md](./assets/migration-plan-template.md) as the output format for `audit` mode.
 
@@ -91,6 +92,7 @@ Read existing code and representative consumers before choosing a strategy. Chec
 - **Contract before code**: extract the behavioral contract before touching any file.
 - **Breaking changes are first-class**: classify every breaking change before migration begins; do not discover them mid-implementation.
 - **Official guide first**: consult the target tech's official migration documentation and known codemods before designing a custom approach.
+- **Use flow analysis only for behavior-sensitive risk**: trace control paths and value lineage when runtime, lifecycle, async, or error semantics could change across the migration.
 - **Compatibility layers are temporary**: every shim, polyfill, or adapter must have a named owner, a removal condition, and a documented expected lifetime.
 - **Migrate in cohorts**: never do a single unbounded sweep; group consumers by risk and move them in order.
 - **Prove behavioral equivalence**: surface change does not imply behavioral equivalence; evidence must map to the behavioral contract, not to surface shape.
