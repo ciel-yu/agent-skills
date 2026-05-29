@@ -1,6 +1,6 @@
 ---
 name: semantic-safe-refactor
-description: "Use when the user wants to replace legacy code with a clean implementation without changing behavior, public contracts, or domain meaning. Triggers: rewrite a messy module, refactor without hacking old code, reimplement a service behind the same interface, extract a subsystem behind an adapter, or migrate callers to a new path while preserving semantics. Define a semantic contract first; open an ADR only if the rewrite intentionally changes architecture or externally visible semantics. Do not use for tiny local bug fixes, speculative rewrites with no contract baseline, or redesigns that intentionally change behavior."
+description: "Use when the user wants to replace legacy code with a clean implementation without changing behavior, public contracts, or domain meaning. Triggers: rewrite a messy module, refactor without hacking old code, reimplement a service behind the same interface, or extract a cleaner subsystem behind an existing adapter or facade. Define a semantic contract first; open an ADR only if the rewrite intentionally changes architecture or externally visible semantics. Do not use for tiny local bug fixes, speculative rewrites with no contract baseline, or redesigns that intentionally change behavior."
 ---
 
 # Semantic-Safe Refactor
@@ -26,6 +26,8 @@ Do **not** use for:
 - speculative rewrites when the existing semantic contract has not been established
 - redesigns that intentionally change product behavior, domain meaning, or public contracts without an explicit decision
 - style-only cleanup or mechanical formatting changes
+- module reorganization, moves, or ownership changes where the goal is structural rather than implementational (use `semantic-surface-module-migration`)
+- migrations where the technical surface (API names, import syntax, framework conventions) intentionally changes (use `tech-migration`)
 
 ---
 

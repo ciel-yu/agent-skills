@@ -1,6 +1,6 @@
 ---
 name: semantic-surface-module-migration
-description: "Use when the user wants to move, split, consolidate, or replace a code module by preserving its semantic surface: import paths, callable/API shape, data contracts, side effects, errors, and caller expectations. Triggers: migrate a module to a new package, extract a subsystem behind a stable facade, move callers off a legacy path, split a god module without breaking consumers, or redesign internals while keeping the same surface. Do not use for tiny local edits, purely mechanical renames with no migration risk, or intentional public API redesign without an explicit surface-change decision."
+description: "Use when the user wants to move, split, consolidate, or replace a code module by preserving its semantic surface: import paths, callable/API shape, data contracts, side effects, errors, and caller expectations. Triggers: migrate a module to a new package, extract a subsystem behind a stable facade, move callers off a legacy path, or split a god module without breaking consumers. Do not use for tiny local edits, purely mechanical renames with no migration risk, or intentional public API redesign without an explicit surface-change decision."
 ---
 
 # Semantic Surface Module Migration
@@ -15,10 +15,9 @@ Use when the user asks to:
 
 - move a module to a new package, directory, layer, or ownership boundary without breaking callers
 - split a large module into smaller modules while keeping the same public surface
-- replace a legacy module with a new implementation behind the same import and behavior contract
 - consolidate duplicate modules under one canonical surface and migrate callers safely
 - migrate consumers from a legacy path, adapter, or facade to a new module boundary in stages
-- preserve how a module is discovered and used even when its internals or storage location change
+- preserve how a module is discovered and used even when its storage location or owning boundary changes
 
 Do **not** use for:
 
@@ -26,6 +25,8 @@ Do **not** use for:
 - purely mechanical renames or moves with no meaningful semantic-risk surface
 - brand-new module design with no existing callers or compatibility constraints
 - intentional public API or domain-contract redesign without an explicit decision to change the surface
+- implementation rewrites where the goal is cleaner logic behind a stable interface with no structural change (use `semantic-safe-refactor`)
+- migrations where the technical surface intentionally changes due to a framework upgrade or convention change (use `tech-migration`)
 
 ---
 
