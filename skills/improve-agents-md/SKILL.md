@@ -1,6 +1,6 @@
 ---
 name: improve-agents-md
-description: 'Use when creating, reviewing, or rewriting CLAUDE.md or AGENTS.md files. Applies rules: concise onboarding context, progressive disclosure, pointers over copies, deterministic tools over style prose, and conditional task rules.'
+description: 'Use when creating, reviewing, or rewriting CLAUDE.md or AGENTS.md files. Applies rules: concise onboarding context, current direction, progressive disclosure, pointers over copies, deterministic tools over style prose, and conditional task rules.'
 ---
 
 # Improve `AGENTS.md`
@@ -10,7 +10,8 @@ Create, critique, or rewrite root `CLAUDE.md` / `AGENTS.md` into a **high-levera
 HumanLayer model:
 
 - `AGENTS.md` is **entry context**, not the knowledge base.
-- Explain **WHY / WHAT / HOW**.
+- Explain **WHY / WHAT / CURRENT DIRECTION / HOW**.
+- Clarify the **current direction** when historical patterns conflict.
 - Keep it **short, universal, stable**.
 - Move detailed or task-specific guidance to **separate docs**.
 - Prefer **pointers to sources** over copied snippets.
@@ -27,6 +28,7 @@ Use when the user asks to:
 - convert a large `AGENTS.md` into a layered setup
 - make agent instructions shorter, clearer, or more reliable
 - extract task-specific guidance from a root instruction file
+- clarify current direction when a repo contains competing historical patterns
 - discuss instruction-file structure before editing
 
 Do **not** use this skill for ordinary application code changes.
@@ -63,6 +65,8 @@ Treat the root instruction file as an **onboarding contract** for every session.
 
 If content does not help most tasks, it likely does **not** belong in root.
 
+If examples conflict, name the current direction with concrete decision rules.
+
 ---
 
 ## Deliverables
@@ -74,6 +78,7 @@ Return:
 - current problems
 - keep / move / conditionalize / delete classification
 - recommended root structure
+- current-direction decision rules when patterns conflict
 - suggested companion docs
 - key tradeoffs and risks
 

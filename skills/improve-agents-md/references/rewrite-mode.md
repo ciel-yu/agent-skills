@@ -21,10 +21,13 @@ Preferred root structure:
 
 ## Purpose
 ## Repository Map
+## Current Direction
 ## Default Workflow
 ## Boundaries
 ## Additional Context
 ```
+
+`Current Direction` is optional but recommended when the repo contains competing historical patterns. Use short decision rules for new code, legacy-only areas, migration boundaries, and canonical sources. Omit it when it only restates generic values or duplicates `Boundaries`.
 
 `Additional Context` should be a short routing section to specific docs.
 
@@ -34,6 +37,7 @@ Root file should:
 
 - starts with project purpose
 - gives a repo map quickly
+- clarifies current direction for new work when repository examples conflict
 - specifies concrete default commands where stable
 - describes verification expectations
 - defines hard boundaries clearly
@@ -58,6 +62,7 @@ Prefer:
 - concrete nouns
 - short sections and lists
 - observable, actionable instructions
+- concrete `if/then` decision rules when patterns conflict
 - minimal filler
 - standard industry terms
 - concise, deterministic, agent-readable phrasing
@@ -66,6 +71,7 @@ Avoid:
 
 - motivational language
 - vague statements like "write clean code"
+- abstract `Key Principles` lists that do not change decisions
 - duplicated rules
 - stale examples
 - filler-heavy or ornate wording
