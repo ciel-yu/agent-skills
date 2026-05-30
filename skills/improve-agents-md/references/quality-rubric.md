@@ -5,12 +5,15 @@
 Result must satisfy:
 
 - A new contributor or agent can explain what the repo is within 30 seconds.
+- The repo purpose is framed as a durable mission/objective, not current progress or implementation status.
 - The file gives a clear first-pass map.
 - The default workflow is obvious.
-- When historical patterns conflict, current direction for new work is explicit.
+- When historical patterns conflict, current direction for new work is explicit and written as persistent decisions.
 - All dangerous zones and irreversible operations are captured in `## Boundaries`.
 - Task-specific detail is discoverable without root bloat.
+- Active work state is not stored in root; root points to it only when needed.
 - Automated rules are not manual style prose.
+- Guidance prefers durable mechanisms and strategy over temporary factual snapshots.
 - Every section matters across many sessions.
 
 ---
@@ -22,6 +25,8 @@ Remove:
 - giant lists of shell commands with no prioritization
 - long style-guide sections that belong in tooling
 - abstract `Key Principles` lists that do not change decisions
+- current progress, active implementation status, or milestone tracking in root `AGENTS.md`
+- a `## Current Direction` section that is really a changelog, sprint board, or status note
 - outdated copied snippets
 - instructions for one rare task
 - repeated warnings written three different ways (exception: a single, concrete dangerous-zone constraint is not a repeated warning — do not remove or merge it into vague prose)
@@ -38,6 +43,7 @@ Before finishing, verify:
 - the root file is materially shorter or denser than before
 - companion docs are linked from the root file
 - any `Current Direction` section uses concrete decision rules, paths, and legacy boundaries
+- no root section is acting as a live status board; changing work state has been moved behind pointers
 - all dangerous zones and irreversible operations are present in `## Boundaries`; none were removed or softened
 - no critical fact that prevents silent mistakes was dropped
 - the file still reflects the real repository surface

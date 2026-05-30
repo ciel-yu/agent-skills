@@ -2,19 +2,23 @@
 
 ## Core Model
 
-Treat the root instruction file as an **onboarding contract** for every session.
+Treat the root instruction file as a **cross-session operating contract** for every session.
+
+Assume the root `AGENTS.md` lives at `<repo>/AGENTS.md` and is read by many agents across many sessions. Write for persistence.
 
 Answer:
 
 | Dimension | What it should cover |
 |-----------|----------------------|
-| **WHY** | What the repository is for; key subsystem purpose |
+| **WHY** | What the repository is for; abstract goal, mission, or durable objectives |
 | **WHAT** | Tech stack, repository map, module boundaries |
 | **DIRECTION** | Which pattern is canonical for new work, which is authoritative, how to resolve conflicts |
 | **HOW** | Default commands, verification flow, workflow constraints |
 | **BOUNDARIES** | Hard constraints; dangerous zones; irreversible operations; critical facts that prevent silent mistakes |
 
 If content does not help most tasks, it likely does **not** belong in root.
+
+If content is likely to change with the next work session, it almost certainly does **not** belong in root.
 
 ---
 
@@ -34,25 +38,65 @@ The root file enters every session. Extra instructions dilute attention.
 
 Root content should serve most tasks: repository identity, codebase map, default workflow, key boundaries. Move feature notes, one-off debugging steps, style guides, and drifting examples to companion docs.
 
+This includes **working state**: active task lists, current progress notes, in-flight implementation details, and narrow factual snapshots. Root may point to where those live; root should not become their storage layer.
+
 ### 3. Clarify current direction
 
 When a repository contains multiple competing conventions, tools, or patterns, root instructions should name the current direction for new work.
 
 This is not a full history. It is a short set of decision rules that tells the agent which patterns are canonical, which are authoritative, and how to behave when examples conflict.
 
-### 4. Progressive disclosure
+`## Current Direction` is for **persistent decisions**, not transient state. Good contents: canonical stack choices, legacy-vs-new boundaries, source-of-truth rules, migration posture, preservation rules. Bad contents: "currently implementing X", "latest progress", "remaining tasks", or other time-sensitive updates.
+
+Heuristic: if the line would need updating after a normal day of work, it is probably status, not direction.
+
+### 4. Goals should be abstract, not session-bound
+
+When describing the repository's overall goal, prefer durable abstractions:
+
+- mission
+- product objective
+- system role
+- operating constraints that remain true across sessions
+
+Avoid session-bound material:
+
+- current progress
+- implementation details
+- temporary facts that will drift
+- narrow milestone tracking
+
+Good:
+
+```markdown
+## Purpose
+
+This repo maintains the shared agent operating model for `<repo>`, with reusable policies and references that should remain valid across sessions.
+```
+
+Bad:
+
+```markdown
+## Purpose
+
+We are currently migrating the prompt format and have finished the root rewrite but still need to update three nested files.
+```
+
+### 5. Progressive disclosure
 
 Move narrow or deep instructions into separate Markdown docs. Root should point to them and say to load them **only when relevant**.
 
-### 5. Prefer pointers to copies
+This applies especially to changing state. Root should say **where to find** active plans, status docs, issue trackers, or handoff notes rather than copying that material inline.
+
+### 6. Prefer pointers to copies
 
 Prefer file paths, `file:line` references, and links to authoritative docs over large copied snippets.
 
-### 6. Prefer tooling
+### 7. Prefer tooling
 
 If a rule can be enforced by a formatter, linter, typechecker, hook, or test, prefer tooling over root instructions.
 
-### 7. Make conditional guidance explicit
+### 8. Make conditional guidance explicit
 
 Some instructions apply only in narrow cases. Wrap them in conditional blocks, not vague prose.
 
@@ -71,13 +115,47 @@ Guidelines:
 - Conditions must be specific.
 - Avoid useless conditions like `if="you are writing code"`.
 
-### 8. Hand-tuned beats auto-generated
+### 9. Hand-tuned beats auto-generated
 
 You may generate a draft, but the final root file should be curated.
 
 Every root line affects every session.
 
-### 9. Thinking discipline is not a section
+### 10. Prefer mechanism and strategy over state snapshots
+
+When improving `AGENTS.md`, bias toward durable operating mechanisms:
+
+- how to locate current work state
+- how to resolve conflicting examples
+- how to choose canonical patterns
+- how to escalate risky operations
+- how to discover deeper task-specific guidance
+
+Prefer these over state snapshots like:
+
+- what is being worked on this week
+- which implementation step is half-done
+- exact temporary facts that will be stale soon
+
+Good:
+
+```markdown
+## Additional Context
+
+- For active work status, read `docs/status/current.md` and the linked issue tracker before editing.
+- For architecture decisions, prefer `docs/architecture.md` over older examples in `archive/`.
+```
+
+Bad:
+
+```markdown
+## Current Direction
+
+- We are halfway through the auth refactor.
+- Next step is to update the session cache.
+```
+
+### 11. Thinking discipline is not a section
 
 Concrete, rule-shaped "thinking discipline" (e.g. *reproduce with a failing test first*, *do not copy from `legacy/` for new work*, *ask before irreversible changes*) is welcome — but it belongs **inside existing sections**, not under a new `## Thinking Discipline` / `## Reasoning Framework` heading.
 
@@ -106,7 +184,10 @@ Use `## Current Direction` when the repository contains **competing conventions,
 
 Keep it to concrete `if/then` rules: what is canonical for new work, what is authoritative when sources conflict, what is read-only or legacy-only, when to preserve existing patterns.
 
+Treat this section as a **decision register**, not a live progress report.
+
 Avoid abstract `Key Principles` lists that do not change decisions.
+Avoid current status, milestone tracking, implementation progress, and temporary facts that will require frequent refresh.
 
 **Examples** (software development / reverse engineering / data mining):
 
@@ -196,5 +277,6 @@ Before proposing or rewriting, classify each current section:
 4. **Delete as noise**
 
 Direction-related content belongs in root only when it helps choose between competing patterns across many tasks; move history and rationale to companion docs.
+State-related content belongs in root only when it describes a durable operating mechanism for finding state; otherwise move it to a companion doc, tracker, or handoff artifact.
 
 Do not skip this step.
