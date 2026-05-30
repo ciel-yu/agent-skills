@@ -16,6 +16,14 @@ Result must satisfy:
 - Guidance prefers durable mechanisms and strategy over temporary factual snapshots.
 - Every section matters across many sessions.
 
+For monorepos, additionally verify:
+
+- Root describes the repo topology (where projects live) and notes that projects have their own `AGENTS.md`.
+- Root does not inline project-specific stack, workflow, or boundaries.
+- Each project `AGENTS.md` covers only its own scope and does not repeat root content.
+- Global boundaries are in root; project-local boundaries are in project files.
+- Project files that override a root convention make the override explicit.
+
 ---
 
 ## Anti-Patterns to Remove

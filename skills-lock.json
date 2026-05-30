@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "polish-skill-md": {
+      "source": "ciel-yu/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/polish-skill-md/SKILL.md",
+      "computedHash": "fd3b8f6228b077aa5c7a96a963c5e00e04cc95a5f9b0e1f66db72a08e51164eb"
+    }
+  }
+}

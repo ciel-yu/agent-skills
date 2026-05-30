@@ -6,6 +6,8 @@ Treat the root instruction file as a **cross-session operating contract** for ev
 
 Assume the root `AGENTS.md` lives at `<repo>/AGENTS.md` and is read by many agents across many sessions. Write for persistence.
 
+In a monorepo or multi-project repository, `AGENTS.md` files exist at multiple depths. Each layer adds guidance scoped to its directory; parent layers are always read first. See [layered-setup.md](./layered-setup.md) for the full hierarchy model.
+
 Answer:
 
 | Dimension | What it should cover |
@@ -19,6 +21,8 @@ Answer:
 If content does not help most tasks, it likely does **not** belong in root.
 
 If content is likely to change with the next work session, it almost certainly does **not** belong in root.
+
+In a monorepo, if content applies to only one project, it belongs in that **project's** `AGENTS.md`, not in root.
 
 ---
 

@@ -9,8 +9,10 @@ Use this mode when the user wants implementation.
 Read:
 
 - the current root `CLAUDE.md` and/or `AGENTS.md`
-- nested instruction files if they affect structure
+- **all nested `AGENTS.md` files** — map their paths
 - repository layout and major build/test entrypoints
+
+For monorepos: determine whether the repo needs a layered setup. Load [layered-setup.md](./layered-setup.md) if the repo is a monorepo or if nested `AGENTS.md` files already exist.
 
 ### Phase 2: Decide the target shape
 
@@ -55,7 +57,14 @@ If root contains detailed task-specific content, create companion Markdown files
 
 If root contains active work tracking or current implementation status, move it to companion docs, issue trackers, or handoff artifacts and leave a short pointer in root only when broadly useful.
 
-Good candidates:
+If the repo is a monorepo, create or update per-project `AGENTS.md` files:
+
+- Move project-specific stack, workflow, and boundaries into the project file.
+- Remove that content from root.
+- Add a discovery pointer at root: "Each project has its own `AGENTS.md`; read it when working inside that project."
+- See [layered-setup.md](./layered-setup.md) for the full rewrite sequence.
+
+Good candidates for extraction from root:
 
 - testing instructions
 - deployment steps

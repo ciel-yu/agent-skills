@@ -1,23 +1,11 @@
 ---
 name: improve-agents-md
-description: 'Use when creating, reviewing, or rewriting CLAUDE.md or AGENTS.md files. Applies rules: cross-session instruction design, concise onboarding context, decision-focused current direction, progressive disclosure, pointers over copies, and strategy/mechanism-oriented guidance.'
+description: 'Use when creating, reviewing, or rewriting AGENTS.md or CLAUDE.md files — for single-project or monorepo repositories. Covers new file scaffolding, quality review, full rewrite, layered hierarchy design for monorepos, duplication cleanup between root and project-level files, and converting a flat file into a layered setup. Do not use for ordinary application code changes, non-instruction documentation, or skill manifests (SKILL.md).'
 ---
 
 # Improve `AGENTS.md`
 
-Create, critique, or rewrite root `CLAUDE.md` / `AGENTS.md` into a **high-leverage cross-session operator contract**, not a prompt dump.
-
-Principles:
-
-- **Entry context**, not knowledge base — every line enters every session.
-- **Cross-session instruction file**, not status storage — root guidance must persist across sessions and agents.
-- Cover **WHY / WHAT / DIRECTION / HOW / BOUNDARIES**.
-- Keep overall goals **abstract and durable**: mission, objectives, and decision-worthy intent; not current progress, implementation details, or narrow facts that will drift.
-- `## Current Direction` stores **persistent decisions**: canonical choices, authoritative sources, and legacy boundaries. It does **not** store current work state.
-- Clarify direction and hard boundaries explicitly; keep everything else short.
-- When guidance could be framed either as status or policy, push it toward **mechanism / strategy**: how to find current state, how to choose, how to act.
-- Move task-specific guidance to companion docs; prefer pointers over copies.
-- Use tooling (linters, formatters, hooks) for deterministic enforcement.
+Create, critique, or rewrite `AGENTS.md` / `CLAUDE.md` into a **cross-session operator contract**, not a prompt dump. This skill is a **Reviewer + Generator + Pipeline**: `analyze` mode diagnoses and proposes without editing files; `rewrite` mode implements; both require a classification step before proceeding.
 
 ---
 
@@ -25,40 +13,59 @@ Principles:
 
 Use when the user asks to:
 
-- create a new `AGENTS.md`
-- improve or rewrite an existing `AGENTS.md`
+- create a new `AGENTS.md` or `CLAUDE.md`
+- improve, review, or rewrite an existing one
+- design or audit a layered `AGENTS.md` hierarchy in a monorepo or multi-project repo
+- decide what belongs in root vs a project-level `AGENTS.md`
+- resolve duplication between root and nested instruction files
 - convert a large `AGENTS.md` into a layered setup
-- make agent instructions shorter, clearer, or more reliable
 - extract task-specific guidance from a root instruction file
 - remove transient work-state content from a root instruction file
-- clarify current direction when a repo contains competing historical patterns
-- discuss instruction-file structure before editing
+- clarify current direction when a repo has competing historical patterns
 
-Do **not** use this skill for ordinary application code changes.
+Do **not** use for:
+
+- ordinary application code changes
+- project documentation that is not an agent instruction file
+- polishing skill manifests (`SKILL.md`)
 
 ---
 
 ## Operating Modes
 
-Modes:
-
-- **`analyze`** - diagnose and redesign without editing files
-- **`rewrite`** - implement a refactor of the instruction files
+- **`analyze`** — diagnose and redesign without editing files
+- **`rewrite`** — implement a refactor of the instruction files
 
 If intent is ambiguous, default to **`analyze`**.
 
 ---
 
+## Pipeline
+
+`inspect → classify ──[GATE]──▶ rewrite → verify`
+
+**Gate:** classification (keep / move / conditionalize / delete per section) must complete before any file is touched. In `analyze` mode, the gate is the terminal step — return the plan and stop. In `rewrite` mode, `DO NOT edit files until classification is complete`.
+
+---
+
 ## Execution
 
-Load as needed:
+Load on demand:
 
-1. **Core methodology:** [references/methodology.md](./references/methodology.md)
-2. **Analyze mode output contract:** [references/analyze-mode.md](./references/analyze-mode.md)
-3. **Rewrite mode workflow:** [references/rewrite-mode.md](./references/rewrite-mode.md)
-4. **Quality rubric and anti-patterns:** [references/quality-rubric.md](./references/quality-rubric.md)
+1. **Core model and principles:** [references/methodology.md](./references/methodology.md) — load at the start of every session
+2. **Analyze mode workflow and output contract:** [references/analyze-mode.md](./references/analyze-mode.md) — load in `analyze` mode
+3. **Rewrite mode workflow:** [references/rewrite-mode.md](./references/rewrite-mode.md) — load in `rewrite` mode
+4. **Quality rubric and anti-patterns:** [references/quality-rubric.md](./references/quality-rubric.md) — load during review and before final verification
+5. **Layered setup for monorepos:** [references/layered-setup.md](./references/layered-setup.md) — load when the repo is a monorepo or has nested `AGENTS.md` files
 
-Always classify sections before proposing or rewriting, including whether any section is incorrectly storing work state instead of durable guidance.
+---
+
+## Core Rules
+
+- **Classify before acting.** Run section classification before proposing or rewriting. Do not skip this step.
+- **Root enters every session.** Every line competes for agent attention; shorter and denser beats longer and comprehensive.
+- **Mechanism over state.** Push guidance toward durable operating mechanisms — how to find current state, how to resolve conflicts, how to choose canonical patterns — not temporary fact snapshots.
+- **Boundaries are exempt from length pressure.** A single concrete constraint that prevents irreversible harm earns its place in root regardless of specificity.
 
 ---
 
