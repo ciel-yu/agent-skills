@@ -1,65 +1,42 @@
 # Analyze Mode
 
-Use when the user wants discussion, critique, diagnosis, or redesign without edits.
+`DO NOT edit any files in this mode.`
 
-## Workflow
+## Phase 1: Inspect
 
-### Phase 1: Inspect
+- Read root `AGENTS.md` / `CLAUDE.md` and all nested `AGENTS.md` files; map paths and directory depths.
+- Read repository layout and major build/test entrypoints.
+- Monorepo: note whether each project has its own `AGENTS.md` and whether root is inlining project-specific detail.
 
-Read:
-
-- the current root `CLAUDE.md` and/or `AGENTS.md`
-- **all nested `AGENTS.md` files** — map their paths and directory depths
-- repository layout and major build/test entrypoints
-
-For monorepos: note whether each project has its own `AGENTS.md` and whether the root file is trying to inline project-specific detail.
-
-### Phase 2: Diagnose
+## Phase 2: Diagnose
 
 Identify:
 
-- what belongs in the root file
-- whether the root file is incorrectly storing current work state instead of durable instructions
-- where competing historical patterns require current-direction rules
-- what dangerous zones or irreversible operations exist and whether they are captured
-- what critical facts (non-obvious invariants, external contracts) are missing from root
-- what is too narrow or too long
-- what should move out
-- what should be conditionalized
-- what should be enforced by tooling instead
+- what belongs in root vs companion docs
+- work state stored as durable instructions (should be a pointer, not inline content)
+- competing historical patterns that need `## Current Direction` rules
+- missing or uncaptured dangerous zones and irreversible operations
+- missing critical facts (non-obvious invariants, external contracts)
+- content that is too narrow, too long, should be conditionalized, or enforced by tooling
 
-For monorepos, additionally check:
+Monorepo additions:
 
 - Is root acting as a project-detail aggregator instead of a monorepo contract?
-- Do project-level files duplicate root content?
+- Do project files duplicate root content?
 - Are global danger zones in root and project-local danger zones in project files?
-- Does root describe the repo topology (where projects live) so agents can navigate?
+- Does root describe the repo topology so agents can navigate?
 - Are project-level overrides of root conventions explicitly flagged?
-
-### Phase 3: Propose
-
-Return:
-
-- a target top-level structure
-- what active status or progress content should be replaced with pointers to authoritative status sources
-- whether `Current Direction` is needed and what decision rules it should contain
-- what belongs in `Boundaries` (dangerous zones, irreversible operations, critical facts)
-- recommended companion docs
-- suggested conditional blocks
-- anti-patterns to remove
 
 ## Output Contract
 
-Include:
+Return in this order:
 
 1. **Current Problems**
-2. **Keep / Move / Conditionalize / Delete**
-3. **Recommended Structure**
-4. **Status vs Durable Guidance** — what should stop living in root, and where root should point instead
-5. **Boundaries** — dangerous zones and critical facts that must stay in root; flag any that are currently missing or buried in companion docs
-6. **Current Direction / Decision Rules** when competing patterns conflict
+2. **Keep / Move / Conditionalize / Delete** — per section
+3. **Recommended Structure** — target top-level headings
+4. **Status vs Durable Guidance** — what should leave root; where root should point instead
+5. **Boundaries** — danger zones and critical facts; flag missing or buried items
+6. **Current Direction / Decision Rules** — when competing patterns conflict
 7. **Suggested Companion Docs**
-8. **Layer Analysis** *(monorepos only)* — map of all `AGENTS.md` files, duplication across layers, what should move from root to project files or vice versa, missing project-level files
+8. **Layer Analysis** *(monorepos only)* — `AGENTS.md` file map, cross-layer duplication, what should move between layers, missing project files
 9. **Risks / Tradeoffs**
-
-Do **not** edit files in this mode.

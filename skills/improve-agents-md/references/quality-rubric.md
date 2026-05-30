@@ -1,58 +1,50 @@
 # Quality Rubric
 
-## Rewrite Rubric
+## Rewrite Checklist
 
-Result must satisfy:
+- [ ] A new agent can explain what the repo is within 30 seconds.
+- [ ] Purpose is a durable mission/objective, not current progress.
+- [ ] The file gives a clear first-pass repo map.
+- [ ] Default workflow is obvious.
+- [ ] `## Current Direction` uses concrete `if/then` rules, not status or milestone tracking.
+- [ ] All dangerous zones and irreversible operations are in `## Boundaries`.
+- [ ] Task-specific detail is discoverable from root without bloating it.
+- [ ] Active work state is not stored in root; root points to it only when needed.
+- [ ] Automated rules are not manual style prose.
+- [ ] Every section matters across many sessions.
 
-- A new contributor or agent can explain what the repo is within 30 seconds.
-- The repo purpose is framed as a durable mission/objective, not current progress or implementation status.
-- The file gives a clear first-pass map.
-- The default workflow is obvious.
-- When historical patterns conflict, current direction for new work is explicit and written as persistent decisions.
-- All dangerous zones and irreversible operations are captured in `## Boundaries`.
-- Task-specific detail is discoverable without root bloat.
-- Active work state is not stored in root; root points to it only when needed.
-- Automated rules are not manual style prose.
-- Guidance prefers durable mechanisms and strategy over temporary factual snapshots.
-- Every section matters across many sessions.
+Monorepos additionally:
 
-For monorepos, additionally verify:
-
-- Root describes the repo topology (where projects live) and notes that projects have their own `AGENTS.md`.
-- Root does not inline project-specific stack, workflow, or boundaries.
-- Each project `AGENTS.md` covers only its own scope and does not repeat root content.
-- Global boundaries are in root; project-local boundaries are in project files.
-- Project files that override a root convention make the override explicit.
+- [ ] Root describes topology and notes that projects have their own `AGENTS.md`.
+- [ ] Root does not inline project-specific stack, workflow, or boundaries.
+- [ ] Each project `AGENTS.md` covers only its own scope; no root content repeated.
+- [ ] Global boundaries in root; project-local boundaries in project files.
+- [ ] Project-level overrides of root conventions are explicitly flagged.
 
 ---
 
-## Anti-Patterns to Remove
+## Anti-Patterns
 
-Remove:
+Remove on sight:
 
-- giant lists of shell commands with no prioritization
-- long style-guide sections that belong in tooling
-- abstract `Key Principles` lists that do not change decisions
-- current progress, active implementation status, or milestone tracking in root `AGENTS.md`
-- a `## Current Direction` section that is really a changelog, sprint board, or status note
+- giant shell-command lists with no prioritization
+- style-guide sections that belong in tooling
+- abstract Key Principles lists that don't change decisions
+- current progress, active implementation status, or milestone tracking
+- `## Current Direction` that is really a changelog or sprint board
 - outdated copied snippets
 - instructions for one rare task
-- repeated warnings written three different ways (exception: a single, concrete dangerous-zone constraint is not a repeated warning — do not remove or merge it into vague prose)
-- aspirational guidance with no operational meaning
-- abstract "reasoning framework / chain of thought / cognitive pathway / mental trajectory" sections — if the underlying content is real, reframe it as **thinking discipline**: concrete, observable rules (preconditions, forbidden shortcuts, verification steps), and fold them into Default Workflow / Boundaries / Current Direction / conditional blocks rather than a dedicated section
-- a `## Thinking Discipline` (or similarly named) heading: the heading itself is gravity that attracts abstract prose back over time
+- the same warning restated multiple ways (exception: a single concrete Boundaries constraint is not a repeated warning — do not merge or soften it)
+- aspirational guidance with no operational meaning (`"be careful with X"`)
+- `## Thinking Discipline` or `## Reasoning Framework` heading — fold real content into `## Default Workflow`, `## Boundaries`, `## Current Direction`, or `<important if>` blocks
 
 ---
 
 ## Final Check
 
-Before finishing, verify:
-
-- the root file is materially shorter or denser than before
-- companion docs are linked from the root file
-- any `Current Direction` section uses concrete decision rules, paths, and legacy boundaries
-- no root section is acting as a live status board; changing work state has been moved behind pointers
-- all dangerous zones and irreversible operations are present in `## Boundaries`; none were removed or softened
-- no critical fact that prevents silent mistakes was dropped
-- the file still reflects the real repository surface
-- the result reads like a reusable operator handbook, not prompt dump
+- [ ] Root file is materially shorter or denser.
+- [ ] Companion docs are linked from root.
+- [ ] `Current Direction` uses concrete decision rules, paths, and legacy boundaries; no status.
+- [ ] No dangerous zones or irreversible operations were softened or dropped from `## Boundaries`.
+- [ ] No critical fact that prevents silent mistakes was removed.
+- [ ] Result reads like a reusable operator handbook.
