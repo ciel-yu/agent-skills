@@ -27,21 +27,15 @@ Preferred root structure:
 ## Additional Context
 ```
 
-`Current Direction` is optional but recommended when the repo contains competing historical patterns. Use short decision rules for new code, legacy-only areas, migration boundaries, and canonical sources. Omit it when it only restates generic values or duplicates `Boundaries`.
+`Current Direction` is optional but recommended when the repo contains competing conventions, tools, or patterns. Use short decision rules for canonical choices, legacy-only areas, and authoritative sources. Omit it when it only restates generic values or duplicates `Boundaries`.
+
+`Boundaries` must capture: dangerous zones (do-not-touch paths, irreversible operations, environments requiring confirmation) and critical facts (non-obvious invariants, hard external contracts the agent cannot infer from code). These are exempt from length pressure — a single concrete boundary line prevents more damage than pages of style guidance.
 
 `Additional Context` should be a short routing section to specific docs.
 
 ### Phase 3: Rewrite for signal density
 
-Root file should:
-
-- starts with project purpose
-- gives a repo map quickly
-- clarifies current direction for new work when repository examples conflict
-- specifies concrete default commands where stable
-- describes verification expectations
-- defines hard boundaries clearly
-- routes to extra docs instead of inlining everything
+Root file should give a map quickly, clarify direction when patterns conflict, define hard boundaries, specify concrete default commands, and route to companion docs instead of inlining detail.
 
 ### Phase 4: Split out detailed guidance
 

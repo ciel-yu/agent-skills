@@ -10,8 +10,9 @@ Answer:
 |-----------|----------------------|
 | **WHY** | What the repository is for; key subsystem purpose |
 | **WHAT** | Tech stack, repository map, module boundaries |
-| **DIRECTION** | Which pattern is canonical for new work, which is legacy-only, how to resolve conflicts (= *Which* + a time vector: where the codebase is heading) |
+| **DIRECTION** | Which pattern is canonical for new work, which is authoritative, how to resolve conflicts |
 | **HOW** | Default commands, verification flow, workflow constraints |
+| **BOUNDARIES** | Hard constraints; dangerous zones; irreversible operations; critical facts that prevent silent mistakes |
 
 If content does not help most tasks, it likely does **not** belong in root.
 
@@ -27,66 +28,29 @@ The root file enters every session. Extra instructions dilute attention.
 - Keep only broadly applicable guidance.
 - Remove repetitive policy prose and low-value detail.
 
+**Exception:** dangerous zones and critical facts that belong in `## Boundaries` are exempt from length pressure. A short, concrete constraint that prevents irreversible harm earns its place in root regardless of how specific it appears.
+
 ### 2. Universal over local
 
-Prefer guidance for most tasks:
-
-- repository identity
-- codebase map
-- default build/test/verify flow
-- important boundaries
-
-Avoid root content like:
-
-- feature-specific implementation notes
-- one-off debugging steps
-- long style guides
-- copied examples that may drift
+Root content should serve most tasks: repository identity, codebase map, default workflow, key boundaries. Move feature notes, one-off debugging steps, style guides, and drifting examples to companion docs.
 
 ### 3. Clarify current direction
 
-When a repository contains multiple historical patterns, root instructions should name the current direction for new work.
+When a repository contains multiple competing conventions, tools, or patterns, root instructions should name the current direction for new work.
 
-This is not a full history. It is a short set of decision rules that tells the agent which patterns are canonical, which are legacy-only, and how to behave when examples conflict.
+This is not a full history. It is a short set of decision rules that tells the agent which patterns are canonical, which are authoritative, and how to behave when examples conflict.
 
 ### 4. Progressive disclosure
 
-Move narrow or deep instructions into separate Markdown docs.
-
-Examples:
-
-```text
-agent_docs/
-  running-tests.md
-  code-conventions.md
-  service-architecture.md
-  deployment.md
-  schema-rules.md
-```
-
-Root should point to those docs and say to read them **only when relevant**.
+Move narrow or deep instructions into separate Markdown docs. Root should point to them and say to load them **only when relevant**.
 
 ### 5. Prefer pointers to copies
 
-Prefer:
+Prefer file paths, `file:line` references, and links to authoritative docs over large copied snippets.
 
-- file paths
-- `file:line` references when useful
-- links to authoritative docs
+### 6. Prefer tooling
 
-Avoid large code snippets unless they are the most stable, compact rule format.
-
-### 6. Claude is not a linter
-
-Do not use root instructions as a substitute for:
-
-- formatters
-- linters
-- typecheckers
-- tests
-- hooks
-
-If tooling can enforce a rule, prefer tooling.
+If a rule can be enforced by a formatter, linter, typechecker, hook, or test, prefer tooling over root instructions.
 
 ### 7. Make conditional guidance explicit
 
@@ -138,18 +102,13 @@ Heuristic: *if a rule needs the heading `## Thinking Discipline` to justify its 
 
 ## Optional Target Section: Current Direction
 
-Use `## Current Direction` when the repository contains older and newer patterns, or examples that conflict.
+Use `## Current Direction` when the repository contains **competing conventions, tools, workflows, or patterns** that an agent must choose between — regardless of whether the conflict is architectural, methodological, or toolchain-level.
 
-Keep it to short, stable decision rules:
+Keep it to concrete `if/then` rules: what is canonical for new work, what is authoritative when sources conflict, what is read-only or legacy-only, when to preserve existing patterns.
 
-- what to use for new code
-- what is legacy-only or maintenance-only
-- when to preserve local patterns versus migrate
-- which docs, directories, or modules are canonical when examples conflict
+Avoid abstract `Key Principles` lists that do not change decisions.
 
-Prefer concrete `if/then` rules, paths, and "do not copy X for new work" boundaries. Avoid abstract `Key Principles` lists that do not change decisions.
-
-Example format:
+**Examples** (software development / reverse engineering / data mining):
 
 ```markdown
 ## Current Direction
@@ -160,6 +119,69 @@ This repo contains older and newer patterns. For new work, follow these decision
 - If adding UI, use function components, hooks, and shared design tokens; do not copy class-component examples.
 - If modifying legacy code, preserve behavior and avoid broad migration unless the task explicitly asks for it.
 - If examples conflict, prefer `docs/architecture.md` and the newest modules under `src/features/`.
+```
+
+```markdown
+## Current Direction
+
+This repo targets multiple binaries with different toolchains. Follow these decision rules:
+
+- If analyzing a new binary, start with static analysis in Ghidra; use dynamic tracing only when static analysis hits a wall.
+- Document findings in `findings/<target>/notes.md`; do not commit raw IDB files to main branch.
+- If toolchain examples conflict, prefer scripts under `tools/` over ad-hoc one-liners.
+- Treat `archive/` as read-only reference material; do not copy patterns from it for active targets.
+```
+
+```markdown
+## Current Direction
+
+This repo contains both exploratory notebooks and production pipelines. Follow these decision rules:
+
+- For new analysis, use scripts under `pipelines/`; treat notebooks in `notebooks/explore/` as scratch space, not canonical.
+- Raw data lives in `data/raw/` and is immutable; always write outputs to `data/processed/`.
+- If a data source has both a v1 and v2 collector, use v2; v1 is maintenance-only.
+- When findings need to be shared, output to `reports/` as Markdown; do not rely on notebook output cells as deliverables.
+```
+
+---
+
+## Optional Target Section: Boundaries
+
+Use `## Boundaries` for two categories of content that must stay in root regardless of length pressure.
+
+**Dangerous zones** — actions where a mistake is irreversible or has outsized consequences: do-not-modify paths, files, systems, or branches; operations requiring explicit confirmation; environments or data that must not be touched autonomously.
+
+**Critical facts** — non-obvious invariants needed to avoid silent mistakes: shared state between systems, hard external contracts, mandatory prerequisites that cannot be inferred from code.
+
+**Placement:** if violating a rule causes irreversible damage, data loss, or unauthorized access, it belongs in root `## Boundaries` regardless of how narrow it seems. If a constraint only matters for one specific task, move it to a companion doc. Do not use Boundaries for style preferences, single-subsystem warnings, or aspirational constraints with no observable meaning (`"be careful with X"`).
+
+**Examples** (software development / reverse engineering / data mining):
+
+```markdown
+## Boundaries
+
+- Do not push directly to `main` or `release/*`; all changes go through pull requests.
+- Do not modify `infra/terraform/` without explicit task scope; changes are applied automatically on merge.
+- `config/secrets.example` is a template; never commit real credentials.
+- The public REST API under `src/api/v1/` is consumed by external clients; do not change its contract without a versioning plan.
+```
+
+```markdown
+## Boundaries
+
+- Do not execute untrusted samples on the host machine; use the isolated VM at `vms/analysis-vm`.
+- Do not modify files under `targets/` directly; work only in `workspace/<target>/`.
+- `findings/` is append-only; do not rewrite or delete existing entries.
+- Do not upload samples or findings to external services without explicit instruction.
+```
+
+```markdown
+## Boundaries
+
+- `data/raw/` is immutable; never write, modify, or delete files in it.
+- Do not run collection scripts against live sources without rate-limit configuration set.
+- Do not commit API keys, credentials, or PII to the repository.
+- `reports/` is the only output directory cleared for external sharing; do not share from `data/processed/` directly.
 ```
 
 ---

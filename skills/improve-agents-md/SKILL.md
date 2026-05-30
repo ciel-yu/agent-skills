@@ -7,15 +7,13 @@ description: 'Use when creating, reviewing, or rewriting CLAUDE.md or AGENTS.md 
 
 Create, critique, or rewrite root `CLAUDE.md` / `AGENTS.md` into a **high-leverage onboarding file**, not a prompt dump.
 
-HumanLayer model:
+Principles:
 
-- `AGENTS.md` is **entry context**, not the knowledge base.
-- Explain **WHY / WHAT / CURRENT DIRECTION / HOW**.
-- Clarify the **current direction** when historical patterns conflict.
-- Keep it **short, universal, stable**.
-- Move detailed or task-specific guidance to **separate docs**.
-- Prefer **pointers to sources** over copied snippets.
-- Use **linters, formatters, hooks, commands** for deterministic enforcement.
+- **Entry context**, not knowledge base — every line enters every session.
+- Cover **WHY / WHAT / DIRECTION / HOW / BOUNDARIES**.
+- Clarify direction and hard boundaries explicitly; keep everything else short.
+- Move task-specific guidance to companion docs; prefer pointers over copies.
+- Use tooling (linters, formatters, hooks) for deterministic enforcement.
 
 ---
 
@@ -56,41 +54,6 @@ Load as needed:
 4. **Quality rubric and anti-patterns:** [references/quality-rubric.md](./references/quality-rubric.md)
 
 Always classify sections before proposing or rewriting.
-
----
-
-## Core Rule
-
-Treat the root instruction file as an **onboarding contract** for every session.
-
-If content does not help most tasks, it likely does **not** belong in root.
-
-If examples conflict, name the current direction with concrete decision rules.
-
----
-
-## Deliverables
-
-### In `analyze` mode
-
-Return:
-
-- current problems
-- keep / move / conditionalize / delete classification
-- recommended root structure
-- current-direction decision rules when patterns conflict
-- suggested companion docs
-- key tradeoffs and risks
-
-Do **not** edit files.
-
-### In `rewrite` mode
-
-Deliver:
-
-- an updated or newly created root `CLAUDE.md` / `AGENTS.md`
-- companion markdown files needed for progressive disclosure
-- concise keep / move / conditionalize / delete explanation
 
 ---
 
