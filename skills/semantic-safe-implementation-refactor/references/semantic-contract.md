@@ -64,6 +64,21 @@ Before replacement, try to answer:
 
 ---
 
+## Classification, verdict, and confidence
+
+Classify each notable behavior, then map it to the canonical preservation axis and a verdict:
+
+| Behavior class (this skill) | Canonical class | Default verdict |
+|---|---|---|
+| Intentional, relied upon | Required | Preserve |
+| Relied-upon accidental | Relied-on incidental | Preserve until a decision retires it |
+| Ambiguous | Ambiguous | Decision-required (resolve before porting) |
+| Dead | Dead | Free-to-change after proving non-reliance |
+
+Give every element an explicit **verdict** - **Preserve**, **Decision-required**, or **Free-to-change** - and record a **confidence** (high / medium / low). Route any Decision-required item through the ADR gate before porting. Never upgrade a low-confidence guess to a fact; an ambiguous element either gets evidence, gets a decision, or is carried as a named risk.
+
+---
+
 ## Minimal contract template
 
 Use this shape in notes or planning output:
@@ -81,6 +96,7 @@ Use this shape in notes or planning output:
 - Error behavior:
 - Public/shared boundaries:
 - Compatibility constraints:
+- Per-element class / verdict / confidence:
 - Known ambiguities:
 ```
 

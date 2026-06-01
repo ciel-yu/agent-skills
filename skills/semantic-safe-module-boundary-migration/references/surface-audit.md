@@ -18,6 +18,8 @@ Classify each surface element as:
 - **Ambiguous** - evidence conflicts or is too thin.
 - **Dead** - exported or documented but unused in the migration scope.
 
+Then give each element a **verdict** - **Preserve** (Required or Relied-on incidental), **Decision-required** (route through the surface-break gate; also any Ambiguous element), or **Free-to-change** (Dead with confirmed non-reliance, or a discovery path intended to change via a compatibility bridge). Record a **confidence** (high / medium / low) on every element; never upgrade a low-confidence guess to a fact.
+
 Do not define the surface from exports alone; confirm it against real consumers.
 
 ---
@@ -28,7 +30,7 @@ Use when building the surface map:
 
 ```md
 ## Semantic Surface Map
-| Surface element | Class | Entry point | Evidence | Notes |
-|---|---|---|---|---|
-| <name / path> | Required / Relied-on incidental / Ambiguous / Dead | <file:line> | <source> | |
+| Surface element | Class | Verdict | Entry point | Evidence | Confidence | Notes |
+|---|---|---|---|---|---|---|
+| <name / path> | Required / Relied-on incidental / Ambiguous / Dead | Preserve / Decision-required / Free-to-change | <file:line> | <source> | high / medium / low | |
 ```

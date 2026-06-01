@@ -51,14 +51,16 @@ If sources disagree, report the disagreement instead of guessing.
 
 ## Behavioral vs surface classification
 
-For each notable behavior, classify before migrating:
+For each notable behavior, classify before migrating, then map it to the canonical preservation axis and a verdict:
 
-| Class | Meaning |
-|---|---|
-| **Behavioral** | Produces a result or side effect callers depend on; must survive the migration |
-| **Surface-only** | Caller syntax or API shape changes but outcome is identical; can transform without gate |
-| **Ambiguous** | Unclear whether the change is behavioral; flag and resolve before proceeding |
-| **Dead** | No caller evidence of reliance; candidate for removal |
+| Class | Meaning | Canonical class | Default verdict |
+|---|---|---|---|
+| **Behavioral** | Produces a result or side effect callers depend on; must survive the migration | Required | Preserve |
+| **Surface-only** | Caller syntax or API shape changes but outcome is identical | (allowed-to-change surface) | Free-to-change |
+| **Ambiguous** | Unclear whether the change is behavioral; flag and resolve before proceeding | Ambiguous | Decision-required |
+| **Dead** | No caller evidence of reliance; candidate for removal | Dead | Free-to-change after proof |
+
+Record a **confidence** (high / medium / low) on every behavior. Route any Decision-required item through the behavioral-risk gate before migrating; never upgrade a low-confidence guess to a fact.
 
 ---
 
@@ -75,5 +77,6 @@ For each notable behavior, classify before migrating:
 - Ordering / lifecycle guarantees:
 - Performance / SLA constraints:
 - User-visible behavior:
+- Per-element class / verdict / confidence:
 - Known ambiguities:
 ```
