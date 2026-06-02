@@ -28,6 +28,7 @@ When adding or changing a skill:
 - Do not add a root manifest unless the installer or project requirements explicitly require one; `vercel-labs/skills` discovers valid `SKILL.md` files directly.
 - Do not commit generated runtime state, dependency folders, logs, temp files, or build output.
 - Preserve skill names unless the user asks to rename them.
+- Skills are written in English.
 
 ## References
 
