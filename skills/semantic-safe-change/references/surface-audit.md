@@ -1,0 +1,36 @@
+# Semantic Surface Audit
+
+Map the surface from the caller's point of view.
+
+Audit in this order:
+
+1. **Discovery** - how callers find the module: import path, package export, registry key, DI token, config name, command name.
+2. **Entry points** - exported symbols, constructors, functions, classes, handlers, factories.
+3. **Invocation contract** - parameters, defaults, generics, overloads, sync vs async, initialization order.
+4. **Result contract** - return values, emitted events, mutations, persisted data, thrown errors, nullability.
+5. **Behavioral invariants** - ordering, idempotency, retries, caching, transactions, cleanup, resource ownership.
+6. **Caller assumptions** - timing, side effects, singleton behavior, environment requirements, partial-failure semantics.
+
+Classify each surface element as:
+
+- **Required** - must remain stable for migration safety.
+- **Relied-on incidental** - not intended, but current callers depend on it.
+- **Ambiguous** - evidence conflicts or is too thin.
+- **Dead** - exported or documented but unused in the migration scope.
+
+Then give each element a **verdict** - **Preserve** (Required or Relied-on incidental), **Decision-required** (route through the surface-break gate; also any Ambiguous element), or **Free-to-change** (Dead with confirmed non-reliance, or a discovery path intended to change via a compatibility bridge). Record a **confidence** (high / medium / low) on every element; never upgrade a low-confidence guess to a fact.
+
+Do not define the surface from exports alone; confirm it against real consumers.
+
+---
+
+## Surface element template
+
+Use when building the surface map:
+
+```md
+## Semantic Surface Map
+| Surface element | Class | Verdict | Entry point | Evidence | Confidence | Notes |
+|---|---|---|---|---|---|---|
+| <name / path> | Required / Relied-on incidental / Ambiguous / Dead | Preserve / Decision-required / Free-to-change | <file:line> | <source> | high / medium / low | |
+```

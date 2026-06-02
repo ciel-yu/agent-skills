@@ -1,0 +1,207 @@
+{
+  "operation": "merge",
+  "timestamp": "2026-06-02T00:00:00Z",
+  "sources": [
+    {
+      "skill_name": "semantic-safe-implementation-refactor",
+      "path": "skills/semantic-safe-implementation-refactor",
+      "companion_files": [
+        "assets/refactor-plan-template.md",
+        "references/adr-gate.md",
+        "references/advanced-analysis.md",
+        "references/cutover-checklist.md",
+        "references/equivalence-checks.md",
+        "references/intent-detection.md",
+        "references/legacy-debt-handling.md",
+        "references/seam-selection.md",
+        "references/semantic-contract.md",
+        "references/workflow.md"
+      ]
+    },
+    {
+      "skill_name": "semantic-safe-module-boundary-migration",
+      "path": "skills/semantic-safe-module-boundary-migration",
+      "companion_files": [
+        "assets/migration-plan-template.md",
+        "references/advanced-analysis.md",
+        "references/consumer-mapping.md",
+        "references/cutover-checklist.md",
+        "references/equivalence-checks.md",
+        "references/migration-workflow.md",
+        "references/surface-audit.md",
+        "references/surface-break-gate.md"
+      ]
+    },
+    {
+      "skill_name": "semantic-safe-technology-migration",
+      "path": "skills/semantic-safe-technology-migration",
+      "companion_files": [
+        "assets/migration-plan-template.md",
+        "references/advanced-analysis.md",
+        "references/behavioral-contract.md",
+        "references/breaking-change-inventory.md",
+        "references/compatibility-layer.md",
+        "references/consumer-mapping.md",
+        "references/cutover-checklist.md",
+        "references/equivalence-checks.md",
+        "references/migration-strategy.md"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "skill_name": "semantic-safe-change",
+      "path": "skills/semantic-safe-change",
+      "file_mapping": [
+        {
+          "destination": "SKILL.md",
+          "source_skill": "synthesized",
+          "source_path": "all three SKILL.md files merged",
+          "strategy": "merge"
+        },
+        {
+          "destination": "references/advanced-analysis.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "references/advanced-analysis.md",
+          "strategy": "merge",
+          "additional_sources": [
+            {"skill": "semantic-safe-module-boundary-migration", "path": "references/advanced-analysis.md"},
+            {"skill": "semantic-safe-technology-migration", "path": "references/advanced-analysis.md"}
+          ]
+        },
+        {
+          "destination": "references/cutover-checklist.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "references/cutover-checklist.md",
+          "strategy": "merge",
+          "additional_sources": [
+            {"skill": "semantic-safe-module-boundary-migration", "path": "references/cutover-checklist.md"},
+            {"skill": "semantic-safe-technology-migration", "path": "references/cutover-checklist.md"}
+          ]
+        },
+        {
+          "destination": "references/equivalence-checks.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "references/equivalence-checks.md",
+          "strategy": "merge",
+          "additional_sources": [
+            {"skill": "semantic-safe-module-boundary-migration", "path": "references/equivalence-checks.md"},
+            {"skill": "semantic-safe-technology-migration", "path": "references/equivalence-checks.md"}
+          ]
+        },
+        {
+          "destination": "references/consumer-mapping.md",
+          "source_skill": "semantic-safe-module-boundary-migration",
+          "source_path": "references/consumer-mapping.md",
+          "strategy": "merge",
+          "additional_sources": [
+            {"skill": "semantic-safe-technology-migration", "path": "references/consumer-mapping.md"}
+          ]
+        },
+        {
+          "destination": "references/intent-detection.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "references/intent-detection.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/semantic-contract.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "references/semantic-contract.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/seam-selection.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "references/seam-selection.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/legacy-debt-handling.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "references/legacy-debt-handling.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/adr-gate.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "references/adr-gate.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/refactor-workflow.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "references/workflow.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/surface-audit.md",
+          "source_skill": "semantic-safe-module-boundary-migration",
+          "source_path": "references/surface-audit.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/surface-break-gate.md",
+          "source_skill": "semantic-safe-module-boundary-migration",
+          "source_path": "references/surface-break-gate.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/boundary-workflow.md",
+          "source_skill": "semantic-safe-module-boundary-migration",
+          "source_path": "references/migration-workflow.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/behavioral-contract.md",
+          "source_skill": "semantic-safe-technology-migration",
+          "source_path": "references/behavioral-contract.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/breaking-change-inventory.md",
+          "source_skill": "semantic-safe-technology-migration",
+          "source_path": "references/breaking-change-inventory.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/compatibility-layer.md",
+          "source_skill": "semantic-safe-technology-migration",
+          "source_path": "references/compatibility-layer.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "references/tech-strategy.md",
+          "source_skill": "semantic-safe-technology-migration",
+          "source_path": "references/migration-strategy.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "assets/refactor-plan-template.md",
+          "source_skill": "semantic-safe-implementation-refactor",
+          "source_path": "assets/refactor-plan-template.md",
+          "strategy": "keep"
+        },
+        {
+          "destination": "assets/migration-plan-template.md",
+          "source_skill": "semantic-safe-module-boundary-migration",
+          "source_path": "assets/migration-plan-template.md",
+          "strategy": "keep"
+        }
+      ],
+      "sections_mapping": [
+        {"destination_section": "Use When", "source_skill": "all three", "source_section": "Use When"},
+        {"destination_section": "Boundary Test", "source_skill": "all three", "source_section": "Boundary Test"},
+        {"destination_section": "Operating Modes", "source_skill": "all three", "source_section": "Operating Modes"},
+        {"destination_section": "Shared Pipeline", "source_skill": "all three", "source_section": "Pipeline"},
+        {"destination_section": "Variant A", "source_skill": "semantic-safe-implementation-refactor", "source_section": "full body"},
+        {"destination_section": "Variant B", "source_skill": "semantic-safe-module-boundary-migration", "source_section": "full body"},
+        {"destination_section": "Variant C", "source_skill": "semantic-safe-technology-migration", "source_section": "full body"},
+        {"destination_section": "Core Rules", "source_skill": "all three", "source_section": "Core Rules"},
+        {"destination_section": "Deliverables", "source_skill": "all three", "source_section": "Deliverables"},
+        {"destination_section": "Verification", "source_skill": "all three", "source_section": "Verification"}
+      ],
+      "description_source": "synthesized from all three skills"
+    }
+  ]
+}
