@@ -1,6 +1,8 @@
 # Token Schema Checklist
 
-## Front matter
+Use this when authoring or repairing the YAML front matter in `DESIGN.md`.
+
+## Minimal shape
 
 ```yaml
 ---
@@ -28,17 +30,17 @@ components:
 ---
 ```
 
-## Valid token types
+## Valid token values
 
-- Color: `#` plus sRGB hex, for example `"#B8422E"`
+- Color: sRGB hex string, for example `"#B8422E"`
 - Dimension: number plus unit, for example `48px`, `1rem`, `-0.02em`
 - Spacing: dimension or number
-- Token reference: `{path.to.token}`
+- Reference: `{path.to.token}`
 - Typography object: `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`, `letterSpacing`, `fontFeature`, `fontVariation`
 
 ## Component properties
 
-Valid properties:
+Use only supported component properties:
 
 - `backgroundColor`
 - `textColor`
@@ -49,13 +51,13 @@ Valid properties:
 - `height`
 - `width`
 
-Represent states as related entries, such as `button-primary-hover`.
+Represent states as sibling entries, for example `button-primary-hover` and `button-primary-disabled`.
 
-## Authoring checks
+## Checks
 
-- Include `primary` when colors exist.
-- Include typography when colors exist.
+- Include `colors.primary` when any colors exist.
+- Include typography tokens when color tokens exist.
 - Use token references in components instead of duplicating raw values.
 - Avoid duplicate markdown section headings.
-- Preserve useful unknown sections.
-- Do not invent token syntax.
+- Preserve useful unknown sections instead of deleting them.
+- Do not invent token syntax or unsupported component properties.

@@ -1,10 +1,12 @@
 # Source Map
 
+Use this during extraction to decide where design evidence comes from and how to map it into `DESIGN.md` tokens.
+
 ## Web
 
 Check:
 
-- `DESIGN.md` if present
+- existing `DESIGN.md`
 - `tailwind.config.*`
 - global CSS files
 - CSS custom properties
@@ -18,7 +20,7 @@ Map:
 - CSS variables -> DESIGN.md tokens
 - Tailwind theme values -> DESIGN.md tokens
 - component variants -> `components` entries
-- pseudo states -> state component entries, such as `button-primary-hover`
+- pseudo states -> state entries such as `button-primary-hover`
 
 ## WPF
 
@@ -63,4 +65,4 @@ Map:
 
 ## Native or custom UI
 
-Check platform theme resources first. If values are only hard-coded in components, extract repeated values and cite representative files.
+Check platform theme resources first. If styles exist only as component-local constants, extract repeated values and cite representative files.

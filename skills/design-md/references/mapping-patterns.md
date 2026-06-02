@@ -1,6 +1,10 @@
 # Token Mapping Patterns
 
+Use this when translating `DESIGN.md` tokens into project styling systems.
+
 ## CSS variables
+
+Map portable token names into existing variable conventions:
 
 ```css
 :root {
@@ -19,7 +23,7 @@ Generate tokens when possible:
 npx @google/design.md export --format css-tailwind DESIGN.md
 ```
 
-Merge `@theme` values into the existing stylesheet.
+Merge generated `@theme` values into the existing stylesheet.
 
 ## Tailwind v3
 
@@ -31,7 +35,7 @@ Merge output into `theme.extend`. Do not replace unrelated theme config.
 
 ## Component variants
 
-Map component entries to variants:
+Map component entries to variants or state selectors:
 
 ```yaml
 components:
@@ -46,6 +50,6 @@ Keep state relationships visible in class names, variants, or selectors.
 ## Avoid
 
 - hard-coding approximate values when exact tokens exist
-- generating a parallel theme
-- using prose while ignoring tokens
+- creating a parallel theme
+- following prose while ignoring token values
 - applying accent colors without hierarchy

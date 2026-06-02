@@ -49,7 +49,6 @@ Load on demand:
 
 1. **Merge strategies and description conflict detection:** [references/merge-strategies.md](./references/merge-strategies.md) — load during `analyze` and `plan` for merge operations.
 2. **Split heuristics and reverse trigger testing:** [references/split-heuristics.md](./references/split-heuristics.md) — load during `analyze` and `verify` for split operations.
-3. **Rollback manifest schema:** [references/migration-manifest.md](./references/migration-manifest.md) — load during `execute` when writing the manifest.
 
 ---
 
@@ -185,8 +184,7 @@ After approval:
 2. **Copy** companion files per plan. Apply the merge strategy from [references/merge-strategies.md](./references/merge-strategies.md) for duplicate references.
 3. **Write** new `SKILL.md` files: kebab-case `name`, approved `description` (≤ 1024 chars), restructured body with corrected internal links.
 4. **Fix cross-references**: every `[link](./references/X.md)` must resolve within the same skill directory.
-5. **Write** `migration-manifest.json` per [references/migration-manifest.md](./references/migration-manifest.md).
-6. **Do not delete** original skill directories.
+5. **Do not delete** original skill directories.
 
 ---
 
@@ -234,5 +232,4 @@ Confirm all resulting skills appear. Report issues and offer to fix.
 - **Do not delete originals.** Create new directories alongside originals. The user decides when to remove old versions.
 - **Self-contained skills.** Shared references are copied to each directory — no cross-skill file dependencies.
 - **Descriptions are synthesized, not concatenated.** Merged descriptions capture unified intent; split descriptions clearly distinguish domains.
-- **Always write a manifest.** Every execution produces `migration-manifest.json` for audit and rollback.
 - **Name with care.** Domain-based kebab-case over operation-based names (e.g., `design-md` not `create-apply-extract-design`).

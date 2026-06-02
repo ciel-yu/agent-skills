@@ -1,17 +1,19 @@
 # Normalization Rules
 
+Use this during extraction to convert platform-specific style values into portable `DESIGN.md` tokens without redesigning them.
+
 ## Colors
 
-- Convert platform color values to hex sRGB.
-- Prefer semantic names over raw color names.
-- Keep alpha only when translucency is a repeated design pattern.
+- Convert platform colors to sRGB hex.
+- Prefer semantic role names over raw color names.
+- Keep alpha only when translucency is a repeated pattern.
 - Merge near-duplicates only when they render identically or share one resource key.
-- Do not rename a clear project token without reason.
+- Do not rename clear project tokens without a reason.
 
 ## Typography
 
-- Group by role: heading, body, label, caption, code.
-- Include family, size, weight, line height when available.
+- Group type by role: heading, body, label, caption, code.
+- Include family, size, weight, and line height when available.
 - Infer line height only from rendered styles or explicit platform defaults.
 - Do not invent font pairings.
 
@@ -19,21 +21,21 @@
 
 - Extract repeated layout values.
 - Use a small scale when values cluster.
-- Keep component-specific padding under `components` when it is not a global scale value.
+- Keep component-specific padding under `components` when it is not a reusable spacing token.
 - Preserve platform units when they map cleanly; DESIGN.md accepts dimensions or numbers.
 
 ## Radius
 
 - Extract repeated `CornerRadius`, `border-radius`, or theme radius values.
 - Name by scale: `sm`, `md`, `lg`, `full`.
-- Keep asymmetric radii in component prose unless the schema cannot represent them cleanly.
+- Put asymmetric radii in component prose when the schema cannot represent them cleanly.
 
 ## Components
 
-- Add component tokens for repeated controls only.
+- Add component tokens only for repeated controls.
 - Use token references instead of raw duplicates.
 - Represent states as separate entries: `button-primary-hover`, `button-primary-disabled`.
-- Include only valid component properties: `backgroundColor`, `textColor`, `typography`, `rounded`, `padding`, `size`, `height`, `width`.
+- Use only valid component properties: `backgroundColor`, `textColor`, `typography`, `rounded`, `padding`, `size`, `height`, `width`.
 
 ## Rationale
 
