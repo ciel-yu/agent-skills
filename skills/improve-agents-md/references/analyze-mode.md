@@ -4,7 +4,8 @@
 
 ## Phase 1: Inspect
 
-- Read root `AGENTS.md` / `CLAUDE.md` and all nested `AGENTS.md` files; map paths and directory depths.
+- Read root `AGENTS.md` / `CLAUDE.md` and all nested instruction files; map paths and directory depths.
+- Identify the target agent and verify its instruction-file discovery and precedence rules.
 - Read repository layout and major build/test entrypoints.
 - Monorepo: note whether each project has its own `AGENTS.md` and whether root is inlining project-specific detail.
 
@@ -40,3 +41,5 @@ Return in this order:
 7. **Suggested Companion Docs**
 8. **Layer Analysis** *(monorepos only)* — `AGENTS.md` file map, cross-layer duplication, what should move between layers, missing project files
 9. **Risks / Tradeoffs**
+
+If the files pass the rubric, state **No findings**, cite the evidence checked, and recommend no rewrite. Do not invent changes to satisfy the output headings.

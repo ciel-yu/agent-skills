@@ -2,7 +2,7 @@
 
 ## Core Model
 
-Root `AGENTS.md` is a **cross-session contract** loaded at the start of every session. Write for persistence, not current progress.
+Treat root `AGENTS.md` / `CLAUDE.md` as a **cross-session contract** across the scope where the target agent loads it. Verify that agent's discovery rules; write for persistence, not current progress.
 
 | Dimension | Covers |
 |-----------|--------|
@@ -27,10 +27,10 @@ In a monorepo, layers accumulate root-first, then project-level. See [layered-se
 5. **Progressive disclosure.** Point to companion docs for narrow or deep content. Root says *where to find* active state, not *what the state is*.
 6. **Pointers over copies.** File paths and links over copied snippets that drift.
 7. **Tooling first.** If a rule can be enforced by a linter, formatter, hook, or test, prefer tooling over instructions.
-8. **Conditional guidance.** Narrow rules go in `<important if="...">` blocks with specific conditions, not vague prose. Do not wrap foundational repo identity. Example: `<important if="you are writing or modifying tests">`.
+8. **Conditional guidance.** State narrow rules as explicit `If <condition>, <action>` bullets under the nearest relevant heading. Do not wrap foundational repo identity or rely on agent-specific markup unless the target agent documents it.
 9. **Hand-tuned.** Generate drafts; curate the final file. Every root line affects every session.
 10. **Mechanism over state.** Prefer: how to find state, how to resolve conflicts, how to choose canonical patterns. Avoid: "currently implementing X", half-done steps, temporary facts.
-11. **No `## Thinking Discipline` heading.** Fold discipline rules into `## Default Workflow`, `## Boundaries`, `## Current Direction`, or `<important if>`. Before adding any rule, it must pass three filters: (a) universal across most tasks, (b) not tool-replaceable, (c) reverses a plausible model default.
+11. **No `## Thinking Discipline` heading.** Fold operational rules into `## Default Workflow`, `## Boundaries`, `## Current Direction`, or explicit conditional bullets. Before adding any rule, it must pass three filters: (a) universal across most tasks, (b) not tool-replaceable, (c) reverses a plausible model default.
 
 ---
 

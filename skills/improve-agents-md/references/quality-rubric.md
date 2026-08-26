@@ -2,6 +2,8 @@
 
 ## Rewrite Checklist
 
+- [ ] The target agent's instruction-file discovery and precedence rules were verified.
+- [ ] Every command, path, architecture claim, and policy has repository or user evidence.
 - [ ] A new agent can explain what the repo is within 30 seconds.
 - [ ] Purpose is a durable mission/objective, not current progress.
 - [ ] The file gives a clear first-pass repo map.
@@ -42,6 +44,7 @@ Remove on sight:
 
 ## Final Check
 
+- [ ] No unsupported facts or tool-loading assumptions were introduced.
 - [ ] Root file is materially shorter or denser.
 - [ ] Companion docs are linked from root.
 - [ ] `Current Direction` uses concrete decision rules, paths, and legacy boundaries; no status.

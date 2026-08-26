@@ -6,14 +6,16 @@ Use layered `AGENTS.md` files when a monorepo contains projects with distinct te
 
 ---
 
-## How agents read layered files
+## Confirm loading semantics first
 
-Most agent tools (Cursor, Claude Code, pi, etc.) **read all `AGENTS.md` files from repo root down to the current working directory** and combine them. Design for this model: instructions accumulate as the agent descends.
+Instruction-file names, traversal, precedence, and merge behavior differ across agents. Before proposing layers:
 
-This means:
-- Root instructions apply everywhere.
-- Project instructions apply only when working inside that project tree.
-- An agent in `packages/foo/` sees both root and `packages/foo/AGENTS.md`.
+1. Identify the target agent or agents.
+2. Verify their documented `AGENTS.md` / `CLAUDE.md` discovery rules.
+3. Record whether parent and nested files accumulate, override, or load only on demand.
+4. Design the hierarchy for the verified behavior; do not assume a root-to-working-directory merge.
+
+When the target agent accumulates parent and nested files, root guidance applies broadly and nested files should add only local, non-duplicated rules. If multiple agents must share the repository, choose the simplest layout they all support or document agent-specific entrypoints.
 
 ---
 
@@ -31,7 +33,7 @@ Three layers is usually the maximum useful depth. Avoid nesting deeper unless ea
 
 ## Scope rule
 
-**Each file covers only what is true at its scope and not already covered by its parent.**
+**For agents that accumulate layered files, each file covers only what is true at its scope and not already covered by its parent.**
 
 | Level | Covers |
 |-------|--------|
@@ -104,12 +106,13 @@ For deeply nested architectures (e.g., `apps/platform/services/auth/`):
 
 When analyzing a monorepo's instruction files:
 
-1. Map all `AGENTS.md` files and their directory depth.
-2. Check root: is it acting as a project-detail aggregator instead of a monorepo contract?
-3. Check projects: do they restate root content verbatim?
-4. Check boundaries: global danger zones in root; project-local danger zones in project files.
-5. Check topology: does root describe where projects live so agents know where to look?
-6. Check overrides: are project-level divergences from root conventions explicitly flagged?
+1. Identify the target agent and verify file names, traversal, precedence, and merge behavior.
+2. Map all instruction files and their directory depth.
+3. Check root: is it acting as a project-detail aggregator instead of a monorepo contract?
+4. Check projects: do they restate root content verbatim?
+5. Check boundaries: global danger zones in root; project-local danger zones in project files.
+6. Check topology: does root describe where projects live so agents know where to look?
+7. Check overrides: are project-level divergences from root conventions explicitly flagged?
 
 ---
 

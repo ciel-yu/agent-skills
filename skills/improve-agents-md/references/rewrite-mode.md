@@ -2,8 +2,9 @@
 
 ## Phase 1: Inspect
 
-- Read root `AGENTS.md` / `CLAUDE.md` and all nested `AGENTS.md` files; map paths.
-- Read repository layout and major build/test entrypoints.
+- Read root `AGENTS.md` / `CLAUDE.md` and all nested instruction files; map paths.
+- Identify the target agent and verify its instruction-file discovery and precedence rules.
+- Read repository layout and major build/test entrypoints; treat only verified commands, paths, and policies as source material.
 - Monorepo: load [layered-setup.md](./layered-setup.md) if nested `AGENTS.md` files exist or the repo structure warrants it.
 
 ## Phase 2: Target shape
@@ -20,6 +21,8 @@ Preferred root structure:
 ## Boundaries
 ## Additional Context
 ```
+
+Treat this as a starting point, not a mandatory template. Omit headings that lack repository evidence; preserve established headings when they are clearer.
 
 - `Current Direction` — include when repo has competing conventions. Short `if/then` rules for canonical choices, legacy-only areas, and authoritative sources. Must hold **persistent decisions**, not live work state; if a line is progress tracking or a temporary fact, replace it with a pointer.
 - `Boundaries` — dangerous zones + critical facts, both exempt from length pressure.
@@ -55,6 +58,8 @@ Monorepo — create or update per-project `AGENTS.md`:
 
 Verify before finishing:
 
+- [ ] The target agent's instruction-file discovery and precedence rules are confirmed.
+- [ ] Every command, path, architecture claim, and policy has repository or user evidence.
 - [ ] Root file is materially shorter or denser than before.
 - [ ] Companion docs are linked with load cues.
 - [ ] `Current Direction` uses concrete decision rules; no progress tracking remains.
