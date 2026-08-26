@@ -1,6 +1,17 @@
 # Quality Rubric
 
-## Rewrite Checklist
+## Severity Order
+
+Report findings in this order; do not assign a numeric score:
+
+1. **Critical — unsafe or unsupported:** invented commands, paths, architecture, or policy; weakened boundaries; omitted irreversible-operation constraints.
+2. **High — loading or scope:** incorrect discovery/precedence assumptions, conflicting layers, duplicated parent guidance, or project detail misplaced in root.
+3. **Medium — durability or operation:** transient work state, unclear purpose or repo map, missing default workflow, or ambiguous canonical direction.
+4. **Low — clarity:** wording, ordering, or formatting that slows use without changing behavior.
+
+If no item fails, report **No findings** and do not recommend churn.
+
+## Evaluation Checklist
 
 - [ ] The target agent's instruction-file discovery and precedence rules were verified.
 - [ ] Every command, path, architecture claim, and policy has repository or user evidence.

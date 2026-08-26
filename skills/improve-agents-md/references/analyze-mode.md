@@ -32,7 +32,7 @@ Monorepo additions:
 
 Return in this order:
 
-1. **Current Problems**
+1. **Findings by Severity** — Critical → High → Medium → Low, using [quality-rubric.md](./quality-rubric.md)
 2. **Keep / Move / Conditionalize / Delete** — per section
 3. **Recommended Structure** — target top-level headings
 4. **Status vs Durable Guidance** — what should leave root; where root should point instead
