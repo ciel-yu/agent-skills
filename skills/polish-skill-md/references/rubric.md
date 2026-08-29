@@ -1,91 +1,161 @@
-# Polish Rubric
+# Review Rubric
 
-Apply in severity order. Fix the first blocking defect, then re-grade.
+Apply authoritative requirements before preferences. A valid skill need not follow a named design pattern or a fixed section template.
 
----
+## Authority order
 
-## Severity Order
+1. explicit user and repository requirements
+2. current [Agent Skills specification](https://agentskills.io/specification) and target-client documentation
+3. observed trigger and task evaluations
+4. official authoring guidance
+5. optional design lenses and style preferences
 
-1. **Triggering defects** - the description misses requests it should catch, or catches requests it should not.
-2. **Pattern drift** - claimed pattern does not match the body. Cross-check the [pattern-to-directory cheat sheet](./patterns.md#pattern-to-directory-cheat-sheet): Generator with no `assets/` is drift; Pipeline with gates that fail the [Gate Test](./patterns.md#5-pipeline) is drift.
-3. **Spec violations** - missing front matter, description > 1024 chars, or `SKILL.md` > ~500 lines without progressive disclosure.
-4. **Context waste** - generic prose, menu-of-equals, copied snippets that will drift.
-5. **Discoverability** - reference files exist but are not linked, or are linked without a *when-to-load* cue.
-6. **Style / maintainability** - inconsistent headings, dead links, stale examples, or untightened prose. See [word-tightening.md](./word-tightening.md). Tighten only after severities 1-5 are resolved.
+When authorities differ, satisfy the target clients or report the incompatibility. Never present a recommendation as a specification rule.
 
----
+## Severity
 
-## Description {#description}
+### Critical
 
-The `description` is the **only** field the agent sees at selection time. Grade it hardest.
+- credential exposure, unauthorized access, destructive behavior, or data exfiltration risk
+- remote content or dependencies executed without an appropriate trust and integrity check
+- bundled instructions that enable prompt injection or bypass the user's stated controls
+- a rewrite that silently weakens a safety invariant
 
-**Required**:
-- Imperative phrasing: "Use when..." not "This skill does...".
-- Frames *user intent*, not internal mechanics.
-- Lists concrete trigger phrases or contexts.
-- States at least one negative scope ("Do not use for...").
-- ≤ 1024 characters.
+### High
 
-**Failure modes**:
-- *Too narrow* - misses paraphrases ("polish" but not "refine" / "tighten" / "clean up").
-- *Too broad* - triggers on adjacent tasks (any Markdown edit).
-- *Implementation-leaking* - explains how, not when.
-- *Keyword-stuffed* - reads like SEO, so the agent ignores it.
+- invalid required frontmatter or a `name` that does not match its directory
+- description scope that predictably misses intended tasks or captures materially different tasks
+- missing, broken, stale, or unusable resources required by the workflow
+- scripts that block for interaction, hide failures, or require undocumented dependencies
+- instructions incompatible with the target client or execution environment
 
-Fix by generalizing the *category* the missed queries represent, not by appending exact keywords.
+### Medium
 
----
+- generic knowledge that adds context without adding capability
+- an exhaustive or heavyweight workflow without applicability boundaries or a fast fallback
+- copied documentation, deep reference chains, duplicated instructions, or eager resource loading
+- optional frontmatter that is inaccurate or too vague to support execution
+- an improvement claim unsupported by a relevant evaluation
 
-## Body
+### Low
 
-For each section, classify it as:
+- inconsistent terms, weak ordering, unnecessary prose, stale examples, or formatting that slows scanning
 
-- **Keep** - load-bearing for most invocations.
-- **Tighten** - keep, but shorten or densify.
-- **Split** - move to `references/`, `assets/`, or `scripts/` with a load cue.
-- **Delete** - noise, drift bait, or generic LLM knowledge.
+If no item fails, return **No findings** and recommend no rewrite.
 
-Body must answer:
+## Specification checks
 
-- *When* does the skill apply? (`Use When`)
-- *What* mode is active? (`Operating Modes`, if any)
-- *How* does the agent proceed? (`Pipeline` / `Execution`)
-- *What* must be true before done? (`Verification`)
+### Required frontmatter
 
----
+`name`:
 
-## Progressive Disclosure
+- 1–64 characters
+- lowercase letters, numbers, and hyphens only
+- no leading, trailing, or consecutive hyphens
+- exactly matches the parent directory name
 
-- `SKILL.md` ≤ ~500 lines / ~5,000 tokens.
-- Every reference file is linked **with a when-to-load cue** (for example, "Load if the API returns non-200").
-- No reference file is loaded unconditionally; if it is always needed, inline it.
-- Scripts over ~30 lines live in `scripts/`, not fenced in `SKILL.md`.
+`description`:
 
----
+- 1–1024 characters
+- says what the skill does and when it should be used
+- contains terms a client can match to realistic user intent
 
-## Anti-Patterns (remove on sight)
+The open specification does not require imperative phrasing or negative scope. Prefer a concise third-person capability statement plus an explicit `Use when...` clause when that form works across target clients. Add negative scope when near-miss evaluations show ambiguity.
 
-- "Best practices" prose with no concrete rule.
-- Menus of equal options with no default.
-- Re-explaining common formats (JSON, PDF, HTTP).
-- Copied excerpts from external docs that will drift; link instead.
-- Conditional blocks with vague conditions ("if you are writing code").
-- Multiple warnings restating the same rule.
-- Verification sections that only say "make sure it works".
-- **Prose gates** in Pipeline skills - soft language ("you might want to validate") that fails the [Gate Test](./patterns.md#5-pipeline). Rewrite as hard constraints (`DO NOT proceed to step N until...`).
-- **Generation from blank input** - Generator skills that create artifacts with no real user-provided material. Per the [transformation heuristic](./patterns.md#tool-wrapper-vs-generator-the-ambiguous-case), these read as plausible noise. Require real input or reclassify as Tool Wrapper.
-- **Eager loading** - every reference file linked at the top with no per-phase load cue.
-- **Filler and hedges** - "you might want to", "consider", "perhaps", "simply", "just", "in order to". Strip per [word-tightening.md](./word-tightening.md). Soft-gate hedges in Pipeline skills are not style defects; they are pattern drift and belong at severity 2.
-- **Rare-synonym vocabulary** - "utilize" for "use", "leverage" for "use", "in the event that" for "if". Replace with the common term.
+### Optional frontmatter
 
----
+- `license`: short identifier or bundled license reference
+- `compatibility`: no more than 500 characters; state real environment requirements only
+- `metadata`: string-to-string mapping
+- `allowed-tools`: experimental and client-dependent; verify before relying on it
 
-## Final Check
+Check target-client additions separately. For example, a client may reject reserved words or XML tags that the open specification does not discuss.
 
-Before declaring polish done:
+### Body and resources
 
-- [ ] Description passes the trigger heuristics above.
-- [ ] Every section maps to a pattern from [patterns.md](./patterns.md) or is meta (`Use When` / `Verification`).
-- [ ] `SKILL.md` is materially shorter or denser than before, without losing load-bearing rules.
-- [ ] All companion files are linked with load cues.
-- [ ] The result reads like a reusable manifest, not a prompt dump.
+The specification imposes no mandatory body headings or pattern taxonomy. It recommends:
+
+- focused procedural instructions, examples, and edge cases
+- `SKILL.md` below roughly 500 lines / 5,000 tokens
+- conditional detail in separate resources
+- direct, relative references from `SKILL.md`; avoid deep reference chains
+
+Treat these as performance guidance, not hard schema failures.
+
+## Description review
+
+Clients advertise at least the skill name and description; the description is the primary routing text, not the only metadata visible.
+
+Check that it:
+
+- covers the coherent task class the body actually supports
+- names concrete capabilities and input or domain cues
+- avoids internal implementation details that do not aid selection
+- avoids unrelated keywords added only to increase activation
+- distinguishes adjacent tasks when confusion is plausible
+- has trigger evidence before being called improved
+
+## Instruction review
+
+Keep content that provides something the base agent is likely to lack:
+
+- a proven sequence, calibrated default, or exact command
+- domain invariants, parsing quirks, format constraints, or failure recovery
+- explicit applicability and termination conditions
+- validation tied to observable output
+
+Tighten, split, or delete:
+
+- generic explanations and motivational prose
+- menus with no default or decision rule
+- repeated warnings and copied upstream documentation
+- task-instance answers disguised as reusable expertise
+- rigid steps whose cost exceeds the routine case
+
+Match specificity to fragility. Flexible work benefits from goals and heuristics; brittle operations need exact steps, validation, and recovery.
+
+## Progressive disclosure
+
+- Keep instructions needed on nearly every invocation in `SKILL.md`.
+- Move conditional depth to focused resource files.
+- Link every required resource from `SKILL.md` with a concrete when-to-load cue.
+- Do not split content merely to satisfy a line count; each extra read has execution cost.
+- Put long reusable templates in `assets/` and repeated deterministic logic in `scripts/` when doing so improves execution. Directory choice is not a taxonomy requirement.
+
+## Scripts and operability
+
+For each script or executable command:
+
+- document prerequisites or declare them in `compatibility`
+- pin dependencies when reproducibility matters
+- accept flags, environment variables, or stdin instead of interactive prompts
+- provide concise `--help`, actionable errors, and stable outputs
+- use structured output when another step consumes it
+- test the normal path and plausible failure paths
+- avoid fetching and executing mutable remote content
+
+## Security review
+
+Inspect every file during a full or pre-publish review, including images and apparently passive resources.
+
+Look for:
+
+- network requests, telemetry, uploads, webhooks, and external imports
+- shell pipelines, encoded payloads, dynamic execution, and privilege changes
+- reads of credentials, home directories, browser data, SSH material, or unrelated files
+- instructions imported from mutable external sources
+- tool permissions broader than the stated capability
+- dependencies without a version, provenance, or integrity strategy
+
+Do not execute suspicious setup to confirm it is suspicious. Report the evidence and a safer design.
+
+## Revision decisions
+
+Use four labels:
+
+- **Keep** — valid and load-bearing.
+- **Tighten** — same behavior with less or clearer context.
+- **Split** — conditionally needed material belongs in a linked resource.
+- **Delete** — unsupported, unsafe, obsolete, duplicated, or demonstrably harmful.
+
+Never delete or create files solely because an optional design lens suggests a different directory shape.

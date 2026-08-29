@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Summarize the numeric columns in ~/data/sales.csv and chart monthly revenue.",
+    "should_trigger": true
+  },
+  {
+    "query": "This TSV has missing values. Show counts by column and basic statistics.",
+    "should_trigger": true
+  },
+  {
+    "query": "Can you tell me the median and outliers in results.csv without changing it?",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a Python service that streams CSV rows into Postgres.",
+    "should_trigger": false
+  },
+  {
+    "query": "Update the formulas and cell colors in budget.xlsx.",
+    "should_trigger": false
+  },
+  {
+    "query": "Convert this JSON configuration file to YAML.",
+    "should_trigger": false
+  }
+]

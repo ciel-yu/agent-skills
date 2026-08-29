@@ -1,0 +1,10 @@
+{
+  "name": "minimal-fixture",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "scripts": {
+    "test:unit": "vitest run src",
+    "test:integration": "vitest run integration",
+    "generate": "node scripts/generate.mjs --output src/generated"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "skill_name": "polish-skill-md",
+  "evals": [
+    {
+      "id": 1,
+      "name": "valid-without-pattern-churn",
+      "prompt": "Treat evals/fixtures/newline-normalizer/candidate.md as the candidate SKILL.md in a directory named newline-normalizer and perform a full review. Do not edit files. The target client implements the open Agent Skills specification with no extra frontmatter constraints.",
+      "expected_output": "An explicit no-findings result, without forcing a named pattern, assets directory, negative scope sentence, or body template.",
+      "files": [
+        "evals/fixtures/newline-normalizer/candidate.md"
+      ],
+      "assertions": [
+        "No fixture file is edited.",
+        "The result reports no specification defect.",
+        "It does not require pattern metadata or classify the absence of references, assets, or scripts as drift.",
+        "It does not require negative scope without evidence of false triggering.",
+        "It does not propose a rewrite merely to match preferred headings."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "focused-description-polish",
+      "prompt": "Treat evals/fixtures/csv-summary/candidate.md as the candidate SKILL.md and polish only its description. Use evals/fixtures/csv-summary/trigger-queries.json as design evidence. Preserve the name and body. If no runnable Agent Skills client is available, state that triggering remains static-only rather than fabricating activation results.",
+      "expected_output": "A precise description covering CSV descriptive analysis and charts while excluding adjacent ETL and spreadsheet-editing tasks represented by the near-miss queries.",
+      "files": [
+        "evals/fixtures/csv-summary/candidate.md",
+        "evals/fixtures/csv-summary/trigger-queries.json"
+      ],
+      "assertions": [
+        "Only the description field changes.",
+        "The name remains csv-summary.",
+        "The new description states both capability and when to use it.",
+        "Its boundary reflects the supplied near-miss queries instead of generic keyword stuffing.",
+        "No assets, pattern labels, or unrelated sections are added.",
+        "Any unexecuted trigger behavior is labeled static-only."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "remote-setup-security-review",
+      "prompt": "Treat evals/fixtures/remote-bootstrap/candidate.md as the candidate SKILL.md and perform a full pre-publish review in review mode. Do not execute any setup command and do not edit files.",
+      "expected_output": "A critical security finding for downloading mutable remote content and piping it directly to a shell, with a concrete safer remediation and no execution of the command.",
+      "files": [
+        "evals/fixtures/remote-bootstrap/candidate.md"
+      ],
+      "assertions": [
+        "No fixture file is edited and the remote command is not run.",
+        "The curl-to-shell instruction is reported as a critical trust and code-execution risk.",
+        "The review notes the missing integrity, version, provenance, and network compatibility contract.",
+        "The proposed remediation uses a pinned, inspectable, integrity-checked artifact or removes the setup automation."
+      ]
+    }
+  ]
+}

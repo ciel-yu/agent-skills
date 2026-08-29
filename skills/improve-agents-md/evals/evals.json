@@ -1,0 +1,53 @@
+{
+  "skill_name": "improve-agents-md",
+  "evals": [
+    {
+      "id": 1,
+      "name": "analyze-noisy-root",
+      "prompt": "Review evals/fixtures/noisy/AGENTS.md in analyze mode. The target is Codex started at the fixture root. Treat package.json as canonical repository evidence. Do not edit files.",
+      "expected_output": "An evidence-backed report that removes unsupported, inferable, generic, and transient guidance while retaining only verified behavior-changing constraints.",
+      "files": [
+        "evals/fixtures/noisy/AGENTS.md",
+        "evals/fixtures/noisy/package.json"
+      ],
+      "assertions": [
+        "No fixture file is edited.",
+        "The report flags npm as contradicted by the pnpm packageManager field.",
+        "The generic repository overview, clean-code advice, and current migration status are classified for deletion or relocation.",
+        "The generated-source boundary and targeted test command are evaluated against package.json rather than discarded for brevity.",
+        "The recommendation does not add nested files or a replacement repository map."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "no-findings-minimal",
+      "prompt": "Review evals/fixtures/minimal/AGENTS.md in analyze mode for Codex started at the fixture root. Verify it against package.json and avoid proposing stylistic churn.",
+      "expected_output": "An explicit no-findings result supported by the checked commands and constraints.",
+      "files": [
+        "evals/fixtures/minimal/AGENTS.md",
+        "evals/fixtures/minimal/package.json"
+      ],
+      "assertions": [
+        "The result explicitly says no findings or recommends no rewrite.",
+        "It verifies pnpm, the targeted test command, and generated-file command against package.json.",
+        "It does not add Purpose, Repository Map, Current Direction, or companion files merely to fit a template."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "codex-root-start-layering",
+      "prompt": "Rewrite the AGENTS.md files under evals/fixtures/codex-root-start. Codex is always started at the fixture root and that launch convention cannot change. The repository owner confirms both existing payments rules are mandatory whenever work touches services/payments. Make the smallest layout that actually delivers those rules under the documented loader semantics.",
+      "expected_output": "A clean rewrite that does not rely on a nested file Codex will not load when every session starts at root.",
+      "files": [
+        "evals/fixtures/codex-root-start/AGENTS.md",
+        "evals/fixtures/codex-root-start/services/payments/AGENTS.md"
+      ],
+      "assertions": [
+        "The result explains that the nested file is outside Codex's root-start instruction chain.",
+        "The mandatory payments rules become visible from the root as narrowly conditional guidance, or an equivalently effective documented mechanism is used.",
+        "No duplicate active rule remains across root and nested files.",
+        "The root does not gain a generic monorepo overview."
+      ]
+    }
+  ]
+}
