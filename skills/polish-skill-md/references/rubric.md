@@ -91,9 +91,12 @@ Check that it:
 - covers the coherent task class the body actually supports
 - names concrete capabilities and input or domain cues
 - avoids internal implementation details that do not aid selection
-- avoids unrelated keywords added only to increase activation
+- front-loads recognizable task terms and covers each distinct supported branch
+- collapses synonyms that repeat one branch rather than adding unrelated activation keywords
 - distinguishes adjacent tasks when confusion is plausible
 - has trigger evidence before being called improved
+
+Treat resource links as routing text too: name the material and the concrete condition for reading it. If the workflow misses a needed resource, revise the cue before duplicating its contents inline.
 
 ## Instruction review
 
@@ -114,13 +117,22 @@ Tighten, split, or delete:
 
 Match specificity to fragility. Flexible work benefits from goals and heuristics; brittle operations need exact steps, validation, and recovery.
 
+For each retained step or gate, identify a completion check covering every affected item at the selected depth. Replace vague endpoints such as “understand the inputs” with observable evidence, such as accounting for every required field and unresolved value. More steps cannot compensate for a fuzzy gate. If evaluations still show the agent rushing toward later steps, consider a staged handoff; merely moving text behind an inline link does not remove already-loaded steps from context.
+
+Prefer the desired action over a prohibition when the behavior can be expressed positively. Preserve authoritative safety guardrails, with a permitted action or safe alternative when available. Use familiar, consistently defined terms to replace repeated paraphrases only when clarity survives.
+
+A restatement of configuration, directory layout, or `--help` is a cache of environmental truth. Keep it only when repeated lookup cost or a non-obvious gotcha justifies maintenance. Delete an entire behaviorless sentence rather than shortening it; evaluate disputed redundancy against the actual target agent's baseline.
+
 ## Progressive disclosure
 
-- Keep instructions needed on nearly every invocation in `SKILL.md`.
-- Move conditional depth to focused resource files.
+- Distinguish ordered actions from on-demand facts so reference depth does not bury the workflow; a flat reference-only skill is also valid.
+- Keep instructions needed on nearly every invocation in `SKILL.md`; move branch-specific depth to focused resource files.
+- Co-locate a concept's definition, rules, and caveats; scattering fragments a meaning even when no sentence is duplicated.
+- Give each meaning one authoritative home rather than repeating it across resources.
 - Link every required resource from `SKILL.md` with a concrete when-to-load cue.
-- Do not split content merely to satisfy a line count; each extra read has execution cost.
+- Do not split content merely to satisfy a line count; each extra read has execution cost. Conversely, unique and relevant prose may still sprawl enough to obscure execution.
 - Put long reusable templates in `assets/` and repeated deterministic logic in `scripts/` when doing so improves execution. Directory choice is not a taxonomy requirement.
+- Prefer a resource over another skill unless a distinct task needs independent discovery or invocation. Account for advertised metadata cost and the user's burden of remembering entrypoints. User-only invocation, cross-skill calls, and router behavior are client-specific; verify them before selecting frontmatter or architecture.
 
 ## Scripts and operability
 

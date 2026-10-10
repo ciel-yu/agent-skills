@@ -52,6 +52,8 @@ Classify each item:
 
 Explicit safety or compliance policy does not need a prior incident to have value, but it still needs an authoritative source and correct scope.
 
+Delete a sentence that adds no behavioral value instead of polishing its wording. Whether a rule is redundant depends on the target agent's default behavior, not the reviewer's familiarity; use paired runs to settle consequential disputes.
+
 ## 4. Prioritize scarce information
 
 High-value candidates:
@@ -87,6 +89,10 @@ Do not duplicate parent rules in children. State an override explicitly when bot
 
 A Markdown link is a route to optional context, not proof that the client loads or obeys the target file.
 
+Write each pointer as a reading decision: **when [distinct task condition], read [maintained source] for [needed guidance]**. Include one cue per distinct task branch rather than several synonyms for one case. For example: “Before changing the database schema, read `docs/migrations.md` for compatibility checks.” If needed detail is missed, improve the cue first; inline it only when optional loading remains unreliable or the constraint must always be visible.
+
+Choose disclosure by applicability, not length alone: inline what every affected task needs and link detail used only by some branches. Even nonduplicated rules can overwhelm the root. Each new document should earn its extra read and the maintainer's burden of finding and updating it.
+
 ## 6. Separate guidance from controls
 
 Use `AGENTS.md` to explain the safe action and why it matters. Use the repository's actual control plane for guarantees:
@@ -107,4 +113,10 @@ Order the surviving content for early visibility:
 3. non-obvious conventions and decision rules
 4. conditional pointers to maintained detail
 
-Use headings only when they improve scanning. A valid result may be a few bullets, one root file, no nested files, no change, or no `AGENTS.md` at all.
+Use headings only when they improve scanning. Keep a decision's rule, reason, exceptions, and safe alternative together; give each meaning one authoritative home. A short ordered procedure and a flat reference list are both valid—organize for execution rather than forcing one shape.
+
+State the desired action concretely. Keep necessary prohibitions backed by user or repository policy, with a safe alternative where available; brevity is not grounds to weaken a boundary.
+
+For retained procedures, make completion both checkable and exhaustive within the affected scope. For example, “regenerate every changed schema's client with the canonical command and verify a clean generation diff” is a usable endpoint only when repository evidence supports those checks. Avoid fuzzy endpoints such as “understand the architecture” and avoid adding blanket workflow obligations.
+
+A valid result may be a few bullets, one root file, no nested files, no change, or no `AGENTS.md` at all.

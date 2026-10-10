@@ -57,11 +57,14 @@ Load only what the task needs:
 - **Preserve identity.** Keep `name` and directory identity unless the user explicitly requests a rename; migrate every internal reference if renamed.
 - **Fix consequential defects first.** Safety, specification, triggering, broken execution, and stale resources outrank style.
 - **Do not impose a body template.** The specification permits any body content that helps the agent perform the task.
-- **Write descriptions for selection.** State what the skill does and when to use it. Add negative scope only when adjacent requests create real false positives.
-- **Spend context on missing expertise.** Prefer procedures, calibrated defaults, invariants, quirks, and validation over generic explanations.
-- **Use progressive disclosure.** Keep always-needed instructions in `SKILL.md`; move conditional depth to directly linked resources with explicit load cues.
+- **Write pointers for selection.** A description routes to the skill; a resource link routes to conditional detail. State the capability or material and each distinct condition for reaching it. Front-load recognizable task terms, collapse synonyms for the same branch, and sharpen a missed load cue before inlining its target. Add negative scope only when adjacent requests create real false positives.
+- **Spend context on missing expertise.** Prefer procedures, calibrated defaults, invariants, quirks, and validation over generic explanations. Treat restated configuration or `--help` output as a cache: keep it only when lookup cost justifies maintenance. Delete behaviorless sentences rather than trimming them.
+- **Protect the information hierarchy.** Separate ordered actions from reference facts. Keep always-needed instructions in `SKILL.md`; move conditional depth to directly linked resources with explicit load cues. Keep each concept's definition, rules, and caveats together, with one authoritative home for each meaning.
 - **Match control to fragility.** Give flexible tasks room; give brittle operations exact commands, checks, and recovery paths.
 - **Provide a fast path.** A heavy pipeline needs applicability boundaries, optional steps, and a simpler fallback for routine cases.
+- **Define completion before sequencing.** Give steps and gates observable criteria covering every affected item at the chosen depth. Sharpen fuzzy endpoints before adding steps or splitting files. If evaluations still show premature completion, consider a staged handoff with a real context boundary; an inline link does not hide later steps already in context.
+- **State actions positively.** Prefer the desired behavior; retain necessary hard guardrails with a permitted action or safe alternative. Use compact, familiar terms consistently for repeated concepts, defined where needed, rather than scattering paraphrases or inventing jargon.
+- **Split only for independent reach.** Prefer a companion resource for conditional depth. Create another skill only when a distinct task needs independent discovery or invocation. Balance always-advertised metadata against extra reads and the user's burden of finding entrypoints; verify target-client invocation controls before relying on them.
 - **Treat the bundle as software.** Inspect scripts, external URLs, dependencies, permissions, and data flows; never run suspicious setup during review.
 - **Prefer clean cutovers.** Remove obsolete text, files, links, and aliases after migrating every use.
 
@@ -85,9 +88,11 @@ Load only what the task needs:
 ## Verification
 
 - [ ] `name`, directory name, `description`, and optional frontmatter satisfy the current specification and target client.
-- [ ] Description states both capability and usage context without keyword stuffing.
+- [ ] Description states capability and distinct trigger conditions without keyword stuffing or repeated synonyms.
 - [ ] Every instruction contributes expertise, control, or verification the agent otherwise lacks.
 - [ ] Conditional resources are directly linked with when-to-load cues; no broken or deep reference chains remain.
+- [ ] Actions remain easy to follow; each concept's rules and caveats share one authoritative location.
+- [ ] Procedure endpoints are observable and cover the chosen scope; splits earn their loading or discovery cost.
 - [ ] Scripts are non-interactive, dependency-aware, testable, and documented through useful inputs, outputs, and errors.
 - [ ] External content, network calls, permissions, credentials, and destructive operations were audited.
 - [ ] Heavy workflows expose applicability boundaries and a lightweight fallback.
